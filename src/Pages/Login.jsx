@@ -3,6 +3,7 @@ import { useState } from "react";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase.config";
 import { useNavigate } from "react-router";
+import {Link} from  "react-router"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -52,9 +53,16 @@ const Login = () => {
           Login
         </button>
       </form>
-      <button onClick={handleGoogleLogin} className="w-full bg-red-500 text-white p-2 rounded">
+      <button onClick={handleGoogleLogin} className="w-full bg-black text-white p-2 rounded">
         Sign in with Google
       </button>
+     <div className="flex justify-center items-center mt-2">
+          <small>Don’t Have Account?</small>
+          <Link to="/register" className="text-violet-600 ml-1">
+            Register
+          </Link>
+        </div>
+
     </div>
   );
 };

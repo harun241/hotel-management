@@ -1,0 +1,137 @@
+[
+  {
+    "id": "room1",
+    "name": "Deluxe King Suite",
+    "image": "https://example.com/images/room1.jpg",
+    "description": "Spacious suite with king-sized bed, city view, and modern amenities.",
+    "price": 120,
+    "rating": 4.8,
+    "amenities": ["WiFi", "Air Conditioning", "Breakfast", "Balcony"]
+  },
+  {
+    "id": "room2",
+    "name": "Executive Twin Room",
+    "image": "https://example.com/images/room2.jpg",
+    "description": "Twin beds with workspace, ideal for business travelers.",
+    "price": 95,
+    "rating": 4.6,
+    "amenities": ["WiFi", "Smart TV", "Desk"]
+  },
+  {
+    "id": "room3",
+    "name": "Ocean View Suite",
+    "image": "https://example.com/images/room3.jpg",
+    "description": "Luxury suite with ocean view and private balcony.",
+    "price": 180,
+    "rating": 4.9,
+    "amenities": ["WiFi", "Jacuzzi", "Mini Bar"]
+  },
+  {
+    "id": "room4",
+    "name": "Budget Room",
+    "image": "https://example.com/images/room4.jpg",
+    "description": "Simple and affordable room for solo travelers.",
+    "price": 60,
+    "rating": 4.1,
+    "amenities": ["WiFi", "Fan", "Smart TV"]
+  },
+  {
+    "id": "room5",
+    "name": "Family Suite",
+    "image": "https://example.com/images/room5.jpg",
+    "description": "Large suite with two bedrooms and kitchenette.",
+    "price": 150,
+    "rating": 4.7,
+    "amenities": ["WiFi", "Kitchenette", "Play Area"]
+  },
+  {
+    "id": "room6",
+    "name": "Honeymoon Suite",
+    "image": "https://example.com/images/room6.jpg",
+    "description": "Romantic room with spa tub and candlelight decor.",
+    "price": 200,
+    "rating": 5.0,
+    "amenities": ["Spa Tub", "Room Service", "WiFi"]
+  },
+  {
+    "id": "room7",
+    "name": "Standard Double Room",
+    "image": "https://example.com/images/room7.jpg",
+    "description": "Cozy room with double bed and garden view.",
+    "price": 80,
+    "rating": 4.3,
+    "amenities": ["WiFi", "Air Conditioning"]
+  },
+  {
+    "id": "room8",
+    "name": "Mountain View Room",
+    "image": "https://example.com/images/room8.jpg",
+    "description": "Stunning view of the mountains, peaceful vibe.",
+    "price": 140,
+    "rating": 4.8,
+    "amenities": ["WiFi", "Fireplace", "Balcony"]
+  },
+  {
+    "id": "room9",
+    "name": "Pet-Friendly Room",
+    "image": "https://example.com/images/room9.jpg",
+    "description": "Comfortable space for you and your pet.",
+    "price": 110,
+    "rating": 4.5,
+    "amenities": ["WiFi", "Pet Bed", "Balcony"]
+  },
+  {
+    "id": "room10",
+    "name": "Minimalist Studio",
+    "image": "https://example.com/images/room10.jpg",
+    "description": "Modern design with essential comforts.",
+    "price": 70,
+    "rating": 4.2,
+    "amenities": ["WiFi", "Kitchenette"]
+  },
+  {
+    "id": "room11",
+    "name": "Luxury Penthouse",
+    "image": "https://example.com/images/room11.jpg",
+    "description": "Top floor penthouse with panoramic city views.",
+    "price": 250,
+    "rating": 5.0,
+    "amenities": ["Jacuzzi", "Bar", "Private Elevator"]
+  },
+  {
+    "id": "room12",
+    "name": "Studio Apartment",
+    "image": "https://example.com/images/room12.jpg",
+    "description": "Small apartment ideal for longer stays.",
+    "price": 100,
+    "rating": 4.4,
+    "amenities": ["WiFi", "Kitchen", "Washer"]
+  },
+  {
+    "id": "room13",
+    "name": "Eco Green Room",
+    "image": "https://example.com/images/room13.jpg",
+    "description": "Sustainable room with solar energy and organic materials.",
+    "price": 105,
+    "rating": 4.6,
+    "amenities": ["WiFi", "Organic Toiletries", "Air Purifier"]
+  },
+  {
+    "id": "room14",
+    "name": "Artistic Loft",
+    "image": "https://example.com/images/room14.jpg",
+    "description": "Creative and colorful space for artistic travelers.",
+    "price": 115,
+    "rating": 4.7,
+    "amenities": ["WiFi", "Art Supplies", "Easel"]
+  },
+  {
+    "id": "room15",
+    "name": "Poolside Retreat",
+    "image": "https://example.com/images/room15.jpg",
+    "description": "Room beside the pool with lounge access.",
+    "price": 135,
+    "rating": 4.9,
+    "amenities": ["WiFi", "Pool Access", "Bar Service"]
+  }
+]

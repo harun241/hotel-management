@@ -1,6 +1,7 @@
 
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import 'leaflet/dist/leaflet.css';
 
 import { StrictMode } from "react";
 import  {router}  from "./Router/Router";

@@ -58,12 +58,19 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-             className='bg-black text-white btn btn-ghost'
+            to="/mybookings"
             
+          >
+            My-Bookings
+          </NavLink>
+
+          <NavLink
+             className='bg-black text-white btn btn-ghost'
+            to='/login'
             
         
           >
-            <button>Login</button>
+            <button >Login</button>
           </NavLink>
         </div>
       </div>

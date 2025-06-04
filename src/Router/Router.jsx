@@ -7,7 +7,7 @@ import PrivateRoute from "../Privaate/PrivateRoute";
 import MyBookings from "../Pages/MyBookings"
 import { createBrowserRouter } from "react-router";
 import RoomsPage from "../Pages/RoomsPage";
-
+import RoomDetails from "../Pages/RoomDetails"
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
         element: <Register/>,
       },
       {
-        path: 'My-bookings',
+        path: 'mybookings',
         element: (
        <PrivateRoute>
         <MyBookings/>
@@ -47,10 +47,10 @@ export const router = createBrowserRouter([
         element:<RoomsPage/>,
       },
       {
-        path: '',
+        path: '/roometails/:id',
         element: (
           <PrivateRoute>
-           
+           <RoomDetails/>
           </PrivateRoute>
         ),
       },
