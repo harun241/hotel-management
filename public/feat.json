@@ -2,7 +2,7 @@
   {
     "id": "room1",
     "name": "Deluxe King Suite",
-    "image": "https://example.com/images/room1.jpg",
+    "image": "https://i.ibb.co/qLZXXpkg/indoor-design-luxury-resort-23-2150497283.jpg",
     "description": "Spacious suite with king-sized bed, city view, and modern amenities.",
     "price": 120,
     "rating": 4.8,
@@ -11,7 +11,7 @@
   {
     "id": "room2",
     "name": "Executive Twin Room",
-    "image": "https://example.com/images/room2.jpg",
+    "image": "https://i.ibb.co/VYbPtzy3/pngtree-bedroom-guest-room-five-star-hotel-image-990205.jpg",
     "description": "Twin beds with workspace, ideal for business travelers.",
     "price": 95,
     "rating": 4.6,
@@ -20,7 +20,7 @@
   {
     "id": "room3",
     "name": "Ocean View Suite",
-    "image": "https://example.com/images/room3.jpg",
+    "image": "https://i.ibb.co/KpVFfDKg/room-interior-hotel-bedroom-23-2150683419.jpg",
     "description": "Luxury suite with ocean view and private balcony.",
     "price": 180,
     "rating": 4.9,
@@ -29,7 +29,7 @@
   {
     "id": "room4",
     "name": "Budget Room",
-    "image": "https://example.com/images/room4.jpg",
+    "image": "https://i.ibb.co/ch75ZH3B/3d-rendering-luxury-bedroom-suite-resort-hotel-with-twin-bed-living-105762-2018.jpg",
     "description": "Simple and affordable room for solo travelers.",
     "price": 60,
     "rating": 4.1,
@@ -38,7 +38,7 @@
   {
     "id": "room5",
     "name": "Family Suite",
-    "image": "https://example.com/images/room5.jpg",
+    "image": "https://i.ibb.co/ch75ZH3B/3d-rendering-luxury-bedroom-suite-resort-hotel-with-twin-bed-living-105762-2018.jpg",
     "description": "Large suite with two bedrooms and kitchenette.",
     "price": 150,
     "rating": 4.7,
@@ -47,7 +47,7 @@
   {
     "id": "room6",
     "name": "Honeymoon Suite",
-    "image": "https://example.com/images/room6.jpg",
+    "image": "https://i.ibb.co/fzDDQk39/one-king-size-bed-hotel-room-114579-12159.jpg",
     "description": "Romantic room with spa tub and candlelight decor.",
     "price": 200,
     "rating": 5.0,
@@ -56,7 +56,7 @@
   {
     "id": "room7",
     "name": "Standard Double Room",
-    "image": "https://example.com/images/room7.jpg",
+    "image": "https://i.ibb.co/7xcLHTTz/modern-luxury-bedroom-suite-bathroom-105762-1791.jpg",
     "description": "Cozy room with double bed and garden view.",
     "price": 80,
     "rating": 4.3,
@@ -65,7 +65,7 @@
   {
     "id": "room8",
     "name": "Mountain View Room",
-    "image": "https://example.com/images/room8.jpg",
+    "image": "https://i.ibb.co/qLZXXpkg/indoor-design-luxury-resort-23-2150497283.jpg",
     "description": "Stunning view of the mountains, peaceful vibe.",
     "price": 140,
     "rating": 4.8,
@@ -74,7 +74,7 @@
   {
     "id": "room9",
     "name": "Pet-Friendly Room",
-    "image": "https://example.com/images/room9.jpg",
+    "image": "https://i.ibb.co/7xcLHTTz/modern-luxury-bedroom-suite-bathroom-105762-1791.jpg",
     "description": "Comfortable space for you and your pet.",
     "price": 110,
     "rating": 4.5,
@@ -83,7 +83,7 @@
   {
     "id": "room10",
     "name": "Minimalist Studio",
-    "image": "https://example.com/images/room10.jpg",
+    "image": "https://i.ibb.co/fzDDQk39/one-king-size-bed-hotel-room-114579-12159.jpg",
     "description": "Modern design with essential comforts.",
     "price": 70,
     "rating": 4.2,
@@ -92,7 +92,7 @@
   {
     "id": "room11",
     "name": "Luxury Penthouse",
-    "image": "https://example.com/images/room11.jpg",
+    "image": "https://i.ibb.co/qLZXXpkg/indoor-design-luxury-resort-23-2150497283.jpg",
     "description": "Top floor penthouse with panoramic city views.",
     "price": 250,
     "rating": 5.0,
@@ -101,7 +101,7 @@
   {
     "id": "room12",
     "name": "Studio Apartment",
-    "image": "https://example.com/images/room12.jpg",
+    "image": "https://i.ibb.co/qLZXXpkg/indoor-design-luxury-resort-23-2150497283.jpg",
     "description": "Small apartment ideal for longer stays.",
     "price": 100,
     "rating": 4.4,
@@ -110,7 +110,7 @@
   {
     "id": "room13",
     "name": "Eco Green Room",
-    "image": "https://example.com/images/room13.jpg",
+    "image": "https://i.ibb.co/kVPR4ZRk/3d-rendering-beautiful-comtemporary-luxury-bedroom-suite-hotel-with-tv-105762-2058.jpg",
     "description": "Sustainable room with solar energy and organic materials.",
     "price": 105,
     "rating": 4.6,
@@ -119,7 +119,7 @@
   {
     "id": "room14",
     "name": "Artistic Loft",
-    "image": "https://example.com/images/room14.jpg",
+    "image": "https://i.ibb.co/kVPR4ZRk/3d-rendering-beautiful-comtemporary-luxury-bedroom-suite-hotel-with-tv-105762-2058.jpg",
     "description": "Creative and colorful space for artistic travelers.",
     "price": 115,
     "rating": 4.7,
@@ -128,7 +128,7 @@
   {
     "id": "room15",
     "name": "Poolside Retreat",
-    "image": "https://example.com/images/room15.jpg",
+    "image": "https://i.ibb.co/7xcLHTTz/modern-luxury-bedroom-suite-bathroom-105762-1791.jpg",
     "description": "Room beside the pool with lounge access.",
     "price": 135,
     "rating": 4.9,

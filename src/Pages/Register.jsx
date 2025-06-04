@@ -34,25 +34,32 @@ const Register = () => {
   };
 
   const handleRegister = async e => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const { name, email, password, photoURL } = formData;
+  const { name, email, password, photoURL } = formData;
 
-    if (!validatePassword(password)) return;
+  if (!validatePassword(password)) return;
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(userCredential.user, {
-        displayName: name,
-        photoURL: photoURL
-      });
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-      toast.success("Registration Successful!");
-      navigate("/"); 
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+    await updateProfile(userCredential.user, {
+      displayName: name,
+      photoURL: photoURL
+    });
+
+    toast.success("Registration Successful! Please login now.");
+
+
+    await auth.signOut();
+
+    navigate("/login");
+
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
