@@ -8,6 +8,11 @@ import MyBookings from "../Pages/MyBookings"
 import { createBrowserRouter } from "react-router";
 import RoomsPage from "../Pages/RoomsPage";
 import RoomDetails from "../Pages/RoomDetails"
+
+
+
+
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -34,14 +39,7 @@ export const router = createBrowserRouter([
        </PrivateRoute>
         ),
       },
-      {
-        path: '/tip/:id',
-        element:(
-            <PrivateRoute>
-
-            </PrivateRoute>
-        ),                                                  
-      },
+     
       {
         path: '/rooms',
         element:<RoomsPage/>,

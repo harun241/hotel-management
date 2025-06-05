@@ -4,16 +4,20 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthProvider';
+import ReviewModal from './ReviewModal';
 
 const RoomDetails = () => {
   const { id } = useParams();
   const [room, setRoom] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
   const [bookingDate, setBookingDate] = useState(null);
+  const [userBooking, setUserBooking] = useState(null);
 
   const { user } = useContext(AuthContext);
 
+  // Fetch Room Info
   useEffect(() => {
     const fetchRoom = async () => {
       try {
@@ -27,6 +31,7 @@ const RoomDetails = () => {
     fetchRoom();
   }, [id]);
 
+  // Fetch Reviews
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -39,6 +44,24 @@ const RoomDetails = () => {
 
     fetchReviews();
   }, [id]);
+
+  // Fetch User Booking
+  useEffect(() => {
+    const fetchUserBooking = async () => {
+      if (user && id) {
+        try {
+          const res = await axios.get(`http://localhost:3000/api/bookings?userEmail=${user.email}&roomId=${id}`);
+          if (res.data?.booking) {
+            setUserBooking(res.data.booking);
+          }
+        } catch (error) {
+          console.error('Error fetching user booking:', error);
+        }
+      }
+    };
+
+    fetchUserBooking();
+  }, [user, id]);
 
   const handleBookingConfirm = async () => {
     if (!bookingDate) {
@@ -64,6 +87,7 @@ const RoomDetails = () => {
         alert(`Room booked successfully for ${bookingDate.toLocaleDateString()}`);
         setBookingModalOpen(false);
         setBookingDate(null);
+        setUserBooking(res.data.booking); // Save booking info
       } else {
         alert('Booking failed. Please try again.');
       }
@@ -109,7 +133,7 @@ const RoomDetails = () => {
               <div key={idx} className="border p-4 rounded-lg shadow-sm">
                 <p className="text-gray-800 italic">"{review.comment}"</p>
                 <p className="text-sm text-gray-500 mt-1">
-                  — {review.user || "Anonymous"}, Rating: {review.rating}⭐
+                  — {review.userName || "Anonymous"}, Rating: {review.rating}⭐
                 </p>
               </div>
             ))}
@@ -118,15 +142,27 @@ const RoomDetails = () => {
           <p className="text-gray-500">No reviews yet for this room.</p>
         )}
 
-        <button
-          onClick={() => setBookingModalOpen(true)}
-          className='btn btn-info mt-4 w-full'
-          disabled={room.available === false}
-        >
-          Book Now
-        </button>
+        <div className="mt-6 space-y-3">
+          <button
+            onClick={() => setBookingModalOpen(true)}
+            className='btn btn-info w-full'
+            disabled={room.available === false}
+          >
+            Book Now
+          </button>
+
+          {userBooking && (
+            <button
+              onClick={() => setReviewModalOpen(true)}
+              className='btn btn-primary w-full'
+            >
+              Give Review
+            </button>
+          )}
+        </div>
       </div>
 
+      {/* Booking Modal */}
       {bookingModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded shadow-lg w-96">
@@ -160,6 +196,17 @@ const RoomDetails = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Review Modal */}
+      {reviewModalOpen && (
+        <ReviewModal
+          isOpen={reviewModalOpen}
+          onClose={() => setReviewModalOpen(false)}
+          user={user}
+          roomId={id}
+          bookingId={userBooking?._id}
+        />
       )}
     </div>
   );

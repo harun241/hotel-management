@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
+import ReviewModal from './ReviewModal';
 
 const fetchUserBookings = async (email) => {
   const res = await fetch(`http://localhost:3000/api/bookings?userEmail=${email}`);
@@ -25,18 +26,18 @@ const cancelBooking = async (bookingId) => {
   return await res.json();
 };
 
-const BookingCard = ({ booking, onUpdate, onCancel }) => {
+const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
   const { bookingDate, createdAt, room, _id, userName, userEmail, userImage } = booking;
   const [isUpdating, setIsUpdating] = useState(false);
   const [newDate, setNewDate] = useState(bookingDate?.slice(0, 10) || '');
 
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-6 flex gap-6 items-start">
-     <img
-  src={userImage || room?.image || 'https://i.ibb.co/Sn6hGHJ/user.png'}
-  alt={userName || room?.name || 'Booking Image'}
-  className="w-16 h-16 rounded-full object-cover border"
-/>
+      <img
+        src={userImage || room?.image || 'https://i.ibb.co/Sn6hGHJ/user.png'}
+        alt={userName || room?.name || 'Booking Image'}
+        className="w-16 h-16 rounded-full object-cover border"
+      />
 
       <div className="flex-grow">
         <h3 className="text-xl font-bold text-gray-800 mb-1">{room?.name || 'Unnamed Room'}</h3>
@@ -93,12 +94,14 @@ const BookingCard = ({ booking, onUpdate, onCancel }) => {
           >
             Cancel Booking
           </button>
+
           <button
-            onClick={() => alert('Review feature coming soon!')}
+            onClick={() => onReview(booking)}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
             Review
           </button>
+
           {!isUpdating && (
             <button
               onClick={() => setIsUpdating(true)}
@@ -118,6 +121,8 @@ const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
   useEffect(() => {
     if (!user?.email) return;
@@ -134,6 +139,29 @@ const MyBookings = () => {
     setBookings(prev =>
       prev.map(b => (b._id === bookingId ? { ...b, bookingDate: newDate } : b))
     );
+  };
+
+  const handleSubmitReview = async ({ userName, rating, comment, roomId }) => {
+    try {
+      const res = await fetch('http://localhost:5000/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userName,
+          rating,
+          comment,
+          roomId,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+      const data = await res.json();
+      alert('Review submitted!');
+      console.log('Review posted:', data);
+      setIsReviewModalOpen(false); // close modal after success
+    } catch (error) {
+      alert('Failed to submit review');
+      console.error(error);
+    }
   };
 
   const handleCancelBooking = async (bookingId) => {
@@ -160,8 +188,22 @@ const MyBookings = () => {
           booking={booking}
           onUpdate={handleUpdateBookingDate}
           onCancel={handleCancelBooking}
+          onReview={(booking) => {
+            setSelectedBooking(booking);
+            setIsReviewModalOpen(true);
+          }}
         />
       ))}
+
+      {selectedBooking && (
+        <ReviewModal
+          isOpen={isReviewModalOpen}
+          onClose={() => setIsReviewModalOpen(false)}
+          onSubmit={handleSubmitReview}
+          user={user}
+          roomId={selectedBooking.room._id}
+        />
+      )}
     </div>
   );
 };
