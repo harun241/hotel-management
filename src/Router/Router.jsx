@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
         element: <Register/>,
       },
       {
-        path: 'mybookings',
+        path: 'mybookings/:roomId',
         element: (
        <PrivateRoute>
         <MyBookings/>
@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
             <PrivateRoute>
 
             </PrivateRoute>
-        ),
+        ),                                                  
       },
       {
         path: '/rooms',

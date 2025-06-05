@@ -1,4 +1,4 @@
-// src/pages/Login.jsx
+
 import { useState } from "react";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase.config";

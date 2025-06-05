@@ -1,31 +1,28 @@
 import React from 'react';
 
 const Testimonials = () => {
-  const testimonialStyle = {
-    background: 'white',
-    padding: '20px',
-    borderRadius: '10px',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-    width: '300px',
-    fontSize: '15px',
-    color: '#444',
-    margin: '10px'
-  };
-
   return (
-    <div style={{ backgroundColor: '#f9f9f9', padding: '40px 20px', marginTop: '50px' }}>
-      <h2 style={{ textAlign: 'center', fontSize: '26px' }}>What Our Guests Say</h2>
-      <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '30px' }}>
-        <div style={testimonialStyle}>
-          <p>“Amazing stay! The Deluxe King Suite was spacious and very clean.”</p>
-          <strong>- Sarah, New York</strong>
+    <section className="bg-gray-100 py-16 mt-12">
+      <h2 className="text-center text-3xl font-semibold text-gray-800">
+        What Our Guests Say
+      </h2>
+
+      <div className="flex flex-wrap justify-center gap-8 mt-8 px-4">
+        <div className="bg-white p-6 rounded-lg shadow-md w-72 text-gray-700 text-base">
+          <p className="mb-4">
+            “Amazing stay! The Deluxe King Suite was spacious and very clean.”
+          </p>
+          <strong className="block text-gray-900">- Sarah, New York</strong>
         </div>
-        <div style={testimonialStyle}>
-          <p>“Friendly staff and top-notch service. Will definitely book again!”</p>
-          <strong>- Ahmed, Dubai</strong>
+
+        <div className="bg-white p-6 rounded-lg shadow-md w-72 text-gray-700 text-base">
+          <p className="mb-4">
+            “Friendly staff and top-notch service. Will definitely book again!”
+          </p>
+          <strong className="block text-gray-900">- Ahmed, Dubai</strong>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
