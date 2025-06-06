@@ -1,10 +1,6 @@
-// HotelMap.jsx
-
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-
-
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -15,20 +11,22 @@ L.Icon.Default.mergeOptions({
 
 const HotelMap = ({ lat = 51.505, lon = -0.09, name = 'Hotel Location', zoom = 13 }) => {
   return (
-    <MapContainer
-      center={[lat, lon]}
-      zoom={zoom}
-      scrollWheelZoom={false}
-      style={{ height: '300px', width: '100%' }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={[lat, lon]}>
-        <Popup>{name}</Popup>
-      </Marker>
-    </MapContainer>
+    <div className="mt-6"> {/* 👈 Added margin-top here */}
+      <MapContainer
+        center={[lat, lon]}
+        zoom={zoom}
+        scrollWheelZoom={false}
+        style={{ height: '300px', width: '100%' }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[lat, lon]}>
+          <Popup>{name}</Popup>
+        </Marker>
+      </MapContainer>
+    </div>
   );
 };
 

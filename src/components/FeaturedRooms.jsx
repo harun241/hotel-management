@@ -17,7 +17,7 @@ const FeaturedRooms = () => {
 
   return (
     <div>
-      <div className="text-4xl font-bold flex justify-center my-15">Top Rated Rooms</div>
+      <div className="text-4xl font-bold flex justify-center my-15">Featured Rooms</div>
       <div
         style={{
           padding: '1rem',
