@@ -38,7 +38,6 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
         alt={userName || room?.name || 'Booking Image'}
         className="w-16 h-16 rounded-full object-cover border"
       />
-
       <div className="flex-grow">
         <h3 className="text-xl font-bold text-gray-800 mb-1">{room?.name || 'Unnamed Room'}</h3>
         <p className="text-gray-600 mb-1"><strong>Price:</strong> ${room?.price || 'N/A'}</p>
@@ -47,7 +46,6 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
           <strong>Email:</strong>{' '}
           <a href={`mailto:${userEmail}`} className="text-blue-600 hover:underline">{userEmail}</a>
         </p>
-
         <p className="text-gray-600 mb-1">
           <strong>Booking Date:</strong>{' '}
           {isUpdating ? (
@@ -84,9 +82,7 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
             new Date(bookingDate).toLocaleDateString()
           )}
         </p>
-
         <p className="text-gray-500 text-sm">Booked on: {new Date(createdAt).toLocaleString()}</p>
-
         <div className="mt-4 flex flex-wrap gap-3">
           <button
             onClick={() => onCancel(_id)}
@@ -94,14 +90,12 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
           >
             Cancel Booking
           </button>
-
           <button
             onClick={() => onReview(booking)}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
             Review
           </button>
-
           {!isUpdating && (
             <button
               onClick={() => setIsUpdating(true)}
@@ -126,7 +120,6 @@ const MyBookings = () => {
 
   useEffect(() => {
     if (!user?.email) return;
-
     setLoading(true);
     fetchUserBookings(user.email)
       .then(setBookings)
@@ -143,7 +136,7 @@ const MyBookings = () => {
 
   const handleSubmitReview = async ({ userName, rating, comment, roomId }) => {
     try {
-      const res = await fetch('http://localhost:5000/reviews', {
+      const res = await fetch('http://localhost:3000/reviews', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -157,7 +150,7 @@ const MyBookings = () => {
       const data = await res.json();
       alert('Review submitted!');
       console.log('Review posted:', data);
-      setIsReviewModalOpen(false); // close modal after success
+      setIsReviewModalOpen(false);
     } catch (error) {
       alert('Failed to submit review');
       console.error(error);
