@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Rating from 'react-rating';
+import { FaStar, FaRegStar } from 'react-icons/fa';
 
 const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
   const [rating, setRating] = useState(5);
@@ -9,13 +11,18 @@ const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
 
   useEffect(() => {
     if (user) {
-       setUserName(user.displayName || user.email || 'Anonymous');
-    setUserEmail(user.email || '');
+      setUserName(user.displayName || user.email || 'Anonymous');
+      setUserEmail(user.email || '');
     }
   }, [user]);
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
+    if (rating < 1 || rating > 5) {
+      alert('Rating must be between 1 and 5');
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch('http://localhost:3000/api/reviews', {
@@ -72,14 +79,12 @@ const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
           </div>
           <div className="mb-3">
             <label className="block text-sm font-medium mb-1">Rating (1-5)</label>
-            <input
-              type="number"
-              value={rating}
-              onChange={(e) => setRating(Number(e.target.value))}
-              min={1}
-              max={5}
-              className="w-full border rounded px-3 py-2"
-              required
+            <Rating
+              initialRating={rating}
+              onChange={(rate) => setRating(rate)}
+              fullSymbol={<FaStar className="text-yellow-400 text-xl" />}
+              emptySymbol={<FaRegStar className="text-gray-300 text-xl" />}
+              fractions={1}
             />
           </div>
           <div className="mb-4">

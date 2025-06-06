@@ -9,7 +9,7 @@ const FeaturedRooms = () => {
     fetch('http://localhost:3000/hotels/top-rated')
       .then(res => res.json())
       .then(data => {
-        console.log('Fetched rooms:', data);
+        
         setRooms(data);
       })
       .catch(error => console.error('Error fetching rooms:', error));

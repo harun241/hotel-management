@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import ReviewModal from './ReviewModal';
+import HotelMap from '../components/HotelMap'; // ✅ import Map
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -17,7 +18,6 @@ const RoomDetails = () => {
 
   const { user } = useContext(AuthContext);
 
-  // Fetch Room Info
   useEffect(() => {
     const fetchRoom = async () => {
       try {
@@ -31,7 +31,6 @@ const RoomDetails = () => {
     fetchRoom();
   }, [id]);
 
-  // Fetch Reviews
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -45,7 +44,6 @@ const RoomDetails = () => {
     fetchReviews();
   }, [id]);
 
-  // Fetch User Booking
   useEffect(() => {
     const fetchUserBooking = async () => {
       if (user && id) {
@@ -87,7 +85,7 @@ const RoomDetails = () => {
         alert(`Room booked successfully for ${bookingDate.toLocaleDateString()}`);
         setBookingModalOpen(false);
         setBookingDate(null);
-        setUserBooking(res.data.booking); // Save booking info
+        setUserBooking(res.data.booking);
       } else {
         alert('Booking failed. Please try again.');
       }
@@ -125,6 +123,15 @@ const RoomDetails = () => {
         </div>
       </div>
 
+      {/* ✅ Hotel Map */}
+      {room.latitude && room.longitude && (
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold mb-2">Location</h2>
+          <HotelMap latitude={room.latitude} longitude={room.longitude} name={room.name} />
+        </div>
+      )}
+
+      {/* ✅ Reviews */}
       <div className="mt-8">
         <h3 className="text-2xl font-semibold mb-4">User Reviews</h3>
         {reviews.length > 0 ? (
