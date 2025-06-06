@@ -1,4 +1,3 @@
-
 import { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase.config";
@@ -14,11 +13,19 @@ const AuthProvider = ({ children }) => {
       setUser(loggedUser);
       setLoading(false);
     });
+
     return () => unsubscribe();
   }, []);
 
   const logOut = () => {
-    signOut(auth);
+    signOut(auth)
+      .then(() => {
+        setUser(null);
+        console.log("User logged out");
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      });
   };
 
   return (

@@ -1,10 +1,18 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    if (user) {
+       setUserName(user.displayName || user.email || 'Anonymous');
+    setUserEmail(user.email || '');
+    }
+  }, [user]);
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
@@ -14,8 +22,8 @@ const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userName: user.displayName || 'Anonymous',
-          userEmail: user.email,
+          userName,
+          userEmail,
           rating,
           comment,
           roomId,
@@ -48,9 +56,18 @@ const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
             <label className="block text-sm font-medium mb-1">Name</label>
             <input
               type="text"
-              value={user.displayName}
+              value={userName}
               readOnly
-              className="w-full border rounded px-3 py-2"
+              className="w-full border rounded px-3 py-2 bg-gray-100"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="block text-sm font-medium mb-1">Email</label>
+            <input
+              type="email"
+              value={userEmail}
+              readOnly
+              className="w-full border rounded px-3 py-2 bg-gray-100"
             />
           </div>
           <div className="mb-3">
