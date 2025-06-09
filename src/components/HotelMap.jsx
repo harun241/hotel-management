@@ -11,7 +11,7 @@ L.Icon.Default.mergeOptions({
 
 const HotelMap = ({ lat = 51.505, lon = -0.09, name = 'Hotel Location', zoom = 13 }) => {
   return (
-    <div className="mt-6"> {/* 👈 Added margin-top here */}
+    <div className="mt-6"> 
       <MapContainer
         center={[lat, lon]}
         zoom={zoom}
