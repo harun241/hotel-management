@@ -3,7 +3,7 @@ import Banner from '../components/Banner'
 import HotelMap from '../components/HotelMap';
 import FeaturedRooms from '../components/FeaturedRooms';
 import WhyChooseUs from '../components/WhyChooseUs';
-import Testimonials from '../components/Testimonials';
+import Reviews from '../components/Reviews';
 
 const Home = () => {
     return (
@@ -13,7 +13,7 @@ const Home = () => {
            <HotelMap/>
            <FeaturedRooms/>
            <WhyChooseUs/>
-            <Testimonials/>
+           <Reviews/>
         </div>
     );
 };

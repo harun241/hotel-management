@@ -11,9 +11,9 @@ const Navbar = () => {
      
         <div className="flex items-center">
           <img
-            src="https://i.ibb.co/kkx8Cq2/360-F-96601262-r2d-O5-G9-WRN2-Mdva-Qjg-MFEKa6fz-OZh5-OO.jpg"
+            src="https://i.ibb.co/3m5LJV4d/images.png"
             alt="Hotel Logo"
-            className="h-10 w-10 rounded"
+            className="h-16 w-16 rounded"
           />
           <span className="ml-2 text-xl font-bold text-gray-700">HotelEase</span>
         </div>
@@ -38,7 +38,7 @@ const Navbar = () => {
           })}
 
           <NavLink
-            to="/mybookings"
+            to="/mybookings/:roomId"
             className={({ isActive }) =>
               isActive
                 ? 'text-blue-600 font-semibold'
