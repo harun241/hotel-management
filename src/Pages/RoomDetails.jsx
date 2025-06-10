@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import ReviewModal from './ReviewModal';
-import HotelMap from '../components/HotelMap'; // ✅ import Map
+import HotelMap from '../components/HotelMap'; 
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -123,7 +123,7 @@ const RoomDetails = () => {
         </div>
       </div>
 
-      {/* ✅ Hotel Map */}
+   
       {room.latitude && room.longitude && (
         <div className="mt-10">
           <h2 className="text-xl font-semibold mb-2">Location</h2>
@@ -131,7 +131,7 @@ const RoomDetails = () => {
         </div>
       )}
 
-      {/* ✅ Reviews */}
+  
       <div className="mt-8">
         <h3 className="text-2xl font-semibold mb-4">User Reviews</h3>
         {reviews.length > 0 ? (
@@ -158,6 +158,8 @@ const RoomDetails = () => {
             Book Now
           </button>
 
+            
+
           {userBooking && (
             <button
               onClick={() => setReviewModalOpen(true)}
@@ -169,7 +171,6 @@ const RoomDetails = () => {
         </div>
       </div>
 
-      {/* Booking Modal */}
       {bookingModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded shadow-lg w-96">
@@ -205,7 +206,7 @@ const RoomDetails = () => {
         </div>
       )}
 
-      {/* Review Modal */}
+    
       {reviewModalOpen && (
         <ReviewModal
           isOpen={reviewModalOpen}
