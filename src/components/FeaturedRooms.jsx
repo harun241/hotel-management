@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router'; // ✅ router-dom use korte hobe
+import { Link, useNavigate } from 'react-router'; 
+import { motion, AnimatePresence } from 'framer-motion';
 
 const FeaturedRooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -14,6 +15,12 @@ const FeaturedRooms = () => {
 
   return (
     <div className="py-10 max-w-5xl mx-auto px-4">
+      <motion.div
+  initial={{ opacity: 0, y: 20 }}  // Starting state
+  animate={{ opacity: 1, y: 0 }}   // Animate to this state
+  exit={{ opacity: 0, y: 20 }}     // Animate when component unmounts
+  transition={{ duration: 0.5 }}   // Animation duration and easing
+>
       <h2 className="text-4xl font-bold text-center mb-10">Featured Rooms</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {rooms.length > 0 ? (
@@ -53,8 +60,11 @@ const FeaturedRooms = () => {
         ) : (
           <p className="text-center text-gray-500 col-span-3">Loading rooms or no rooms found.</p>
         )}
+      
       </div>
+        </motion.div>
     </div>
+
   );
 };
 

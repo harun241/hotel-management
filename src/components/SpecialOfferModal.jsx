@@ -1,8 +1,8 @@
 import { Link } from "react-router"; 
 
-const SpecialOfferModal = ({ onClose, roomId }) => {
+const SpecialOfferModal = ({ onClose,  }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+    <div className="fixed inset-0  bg-opacity-60 flex justify-center items-center z-50">
       <div className="bg-white rounded-lg max-w-md w-full p-6 relative shadow-lg">
         <button
           onClick={onClose}
@@ -15,7 +15,7 @@ const SpecialOfferModal = ({ onClose, roomId }) => {
         <img
           src="https://i.ibb.co/ZRPdrdhc/9bb6e7478bc26b8e99d462c7349bfa27.jpg"
           alt="Special Offer"
-          className="rounded-md mb-4 w-full object-cover h-96"
+          className="rounded-md mb-4 w-full object-cover h-72"
         />
         <p className="text-center text-gray-700 mb-6">
           Enjoy up to <span className="font-bold text-red-600">25% OFF</span> on selected rooms. Book now and make your stay unforgettable!

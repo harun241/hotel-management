@@ -1,13 +1,21 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router'; 
 import { AuthContext } from '../context/AuthProvider';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
+          <motion.div
+  initial={{ opacity: 0, y: 20 }}  // Starting state
+  animate={{ opacity: 1, y: 0 }}   // Animate to this state
+  exit={{ opacity: 0, y: 20 }}     // Animate when component unmounts
+  transition={{ duration: 0.5 }}   // Animation duration and easing
+>
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    
      
         <div className="flex items-center">
           <img
@@ -78,7 +86,10 @@ const Navbar = () => {
             </NavLink>
           )}
         </div>
+       
+      
       </div>
+ </motion.div>
     </nav>
   );
 };

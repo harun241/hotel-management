@@ -1,11 +1,12 @@
 import { useParams } from 'react-router';
 import axios from 'axios';
+import { useEffect, useState, useContext } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useEffect, useState, useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import { AuthContext } from '../context/AuthProvider';
 import ReviewModal from './ReviewModal';
-import HotelMap from '../components/HotelMap'; 
+import HotelMap from '../components/HotelMap';
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -15,7 +16,6 @@ const RoomDetails = () => {
   const [reviewModalOpen, setReviewModalOpen] = useState(false);
   const [bookingDate, setBookingDate] = useState(null);
   const [userBooking, setUserBooking] = useState(null);
-
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -31,6 +31,7 @@ const RoomDetails = () => {
     fetchRoom();
   }, [id]);
 
+
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -44,11 +45,14 @@ const RoomDetails = () => {
     fetchReviews();
   }, [id]);
 
+
   useEffect(() => {
     const fetchUserBooking = async () => {
       if (user && id) {
         try {
-          const res = await axios.get(`http://localhost:3000/api/bookings?userEmail=${user.email}&roomId=${id}`);
+          const res = await axios.get(
+            `http://localhost:3000/api/bookings?userEmail=${user.email}&roomId=${id}`
+          );
           if (res.data?.booking) {
             setUserBooking(res.data.booking);
           }
@@ -60,6 +64,7 @@ const RoomDetails = () => {
 
     fetchUserBooking();
   }, [user, id]);
+
 
   const handleBookingConfirm = async () => {
     if (!bookingDate) {
@@ -75,7 +80,7 @@ const RoomDetails = () => {
     const bookingData = {
       roomId: id,
       userEmail: user.email,
-      userName: user.displayName || "Anonymous",
+      userName: user.displayName || 'Anonymous',
       bookingDate: bookingDate.toISOString(),
     };
 
@@ -91,7 +96,7 @@ const RoomDetails = () => {
       }
     } catch (error) {
       console.error('Booking error:', error);
-      alert('Room Already Booked on this date');
+      alert('Room already booked on this date.');
     }
   };
 
@@ -101,6 +106,17 @@ const RoomDetails = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
+     
+      <Helmet>
+        <title>{room.name} | Hotelify</title>
+        <meta name="description" content={room.description?.slice(0, 150)} />
+        <meta property="og:title" content={room.name} />
+        <meta property="og:description" content={room.description?.slice(0, 150)} />
+        <meta property="og:image" content={room.image} />
+        <link rel="canonical" href={`https://your-domain.com/room/${id}`} />
+      </Helmet>
+
+     
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <img
           src={room.image}
@@ -123,7 +139,7 @@ const RoomDetails = () => {
         </div>
       </div>
 
-   
+     
       {room.latitude && room.longitude && (
         <div className="mt-10">
           <h2 className="text-xl font-semibold mb-2">Location</h2>
@@ -131,7 +147,7 @@ const RoomDetails = () => {
         </div>
       )}
 
-  
+
       <div className="mt-8">
         <h3 className="text-2xl font-semibold mb-4">User Reviews</h3>
         {reviews.length > 0 ? (
@@ -140,7 +156,7 @@ const RoomDetails = () => {
               <div key={idx} className="border p-4 rounded-lg shadow-sm">
                 <p className="text-gray-800 italic">"{review.comment}"</p>
                 <p className="text-sm text-gray-500 mt-1">
-                  — {review.userName || "Anonymous"}, Rating: {review.rating}⭐
+                  — {review.userName || 'Anonymous'}, Rating: {review.rating}⭐
                 </p>
               </div>
             ))}
@@ -149,21 +165,20 @@ const RoomDetails = () => {
           <p className="text-gray-500">No reviews yet for this room.</p>
         )}
 
+       
         <div className="mt-6 space-y-3">
           <button
             onClick={() => setBookingModalOpen(true)}
-            className='btn btn-info w-full'
+            className="btn btn-info w-full"
             disabled={room.available === false}
           >
             Book Now
           </button>
 
-            
-
           {userBooking && (
             <button
               onClick={() => setReviewModalOpen(true)}
-              className='btn btn-primary w-full'
+              className="btn btn-primary w-full"
             >
               Give Review
             </button>
@@ -171,6 +186,7 @@ const RoomDetails = () => {
         </div>
       </div>
 
+      
       {bookingModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded shadow-lg w-96">
@@ -206,7 +222,7 @@ const RoomDetails = () => {
         </div>
       )}
 
-    
+   
       {reviewModalOpen && (
         <ReviewModal
           isOpen={reviewModalOpen}
