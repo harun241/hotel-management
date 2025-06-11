@@ -2,25 +2,43 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import ReviewModal from './ReviewModal';
 
-const fetchUserBookings = async (email) => {
-  const res = await fetch(`http://localhost:3000/api/bookings?userEmail=${email}`);
+
+const fetchUserBookings = async (email, accessToken) => {
+  const res = await fetch(`http://localhost:3000/api/bookings?userEmail=${email}`, {
+   
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
   if (!res.ok) throw new Error('Failed to fetch bookings');
   return await res.json();
 };
 
-const updateBookingDate = async (bookingId, newDate, roomId) => {
+const updateBookingDate = async (bookingId, newDate, roomId,accessToken) => {
   const res = await fetch(`http://localhost:3000/api/bookings/${bookingId}`, {
+
+     headers: {
+
+          'Content-Type': 'application/json' ,
+              Authorization: `Bearer ${accessToken}`,
+    },
+
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+
     body: JSON.stringify({ bookingDate: new Date(newDate).toISOString(), roomId }),
   });
   if (!res.ok) throw new Error('Failed to update booking date');
   return await res.json();
 };
 
-const cancelBooking = async (bookingId) => {
+const cancelBooking = async (bookingId,accessToken) => {
   const res = await fetch(`http://localhost:3000/api/bookings/${bookingId}`, {
-    method: 'DELETE',
+method: 'DELETE',
+     headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    
   });
   if (!res.ok) {
     const errorText = await res.text();
@@ -130,6 +148,7 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
+ 
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -137,13 +156,17 @@ const MyBookings = () => {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
   useEffect(() => {
-    if (!user?.email) return;
+    if (!user?.email || !user?.accessToken) return;
+
     setLoading(true);
-    fetchUserBookings(user.email)
+    fetchUserBookings(user.email, user.accessToken)
+    
       .then(setBookings)
+      .then(() => console.log('token in context', user.accessToken))
+
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, [user?.email]);
+  }, [user?.email, user?.accessToken]);
 
   const handleUpdateBookingDate = async (bookingId, newDate, roomId) => {
     await updateBookingDate(bookingId, newDate, roomId);
@@ -156,7 +179,10 @@ const MyBookings = () => {
     try {
       const res = await fetch('http://localhost:3000/api/reviews', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.accessToken}`,
+        },
         body: JSON.stringify({
           userName,
           rating,
