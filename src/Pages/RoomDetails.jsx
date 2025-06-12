@@ -85,7 +85,7 @@ const RoomDetails = () => {
     };
 
     try {
-      const res = await axios.post('http://jp-server-blond.vercel.app/api/bookings', bookingData);
+      const res = await axios.post('https://jp-server-blond.vercel.app/api/bookings', bookingData);
       if (res.data.success) {
         alert(`Room booked successfully for ${bookingDate.toLocaleDateString()}`);
         setBookingModalOpen(false);
@@ -113,7 +113,7 @@ const RoomDetails = () => {
         <meta property="og:title" content={room.name} />
         <meta property="og:description" content={room.description?.slice(0, 150)} />
         <meta property="og:image" content={room.image} />
-        <link rel="canonical" href={`https://your-domain.com/room/${id}`} />
+        <link rel="canonical" href={`https://jp-server-blond.vercel.app/room/${id}`} />
       </Helmet>
 
      
