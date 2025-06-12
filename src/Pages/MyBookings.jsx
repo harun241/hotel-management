@@ -4,7 +4,7 @@ import ReviewModal from './ReviewModal';
 
 
 const fetchUserBookings = async (email, accessToken) => {
-  const res = await fetch(`http://localhost:3000/api/bookings?userEmail=${email}`, {
+  const res = await fetch(`https://jp-server-blond.vercel.app/api/bookings?userEmail=${email}`, {
    
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -16,7 +16,7 @@ const fetchUserBookings = async (email, accessToken) => {
 };
 
 const updateBookingDate = async (bookingId, newDate, roomId,accessToken) => {
-  const res = await fetch(`http://localhost:3000/api/bookings/${bookingId}`, {
+  const res = await fetch(`https://jp-server-blond.vercel.app/api/bookings/${bookingId}`, {
 
      headers: {
 
@@ -33,7 +33,7 @@ const updateBookingDate = async (bookingId, newDate, roomId,accessToken) => {
 };
 
 const cancelBooking = async (bookingId,accessToken) => {
-  const res = await fetch(`http://localhost:3000/api/bookings/${bookingId}`, {
+  const res = await fetch(`https://jp-server-blond.vercel.app/api/bookings/${bookingId}`, {
 method: 'DELETE',
      headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -97,7 +97,7 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
                     alert('Booking updated!');
                   } catch (err) {
                     alert('Failed to update booking');
-                    console.error(err);
+                    
                   }
                 }}
                 className="bg-green-500 text-white px-3 py-1 rounded mr-2 hover:bg-green-600"
@@ -162,7 +162,7 @@ const MyBookings = () => {
     fetchUserBookings(user.email, user.accessToken)
     
       .then(setBookings)
-      .then(() => console.log('token in context', user.accessToken))
+      
 
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
@@ -177,7 +177,7 @@ const MyBookings = () => {
 
   const handleSubmitReview = async ({ userName, rating, comment, roomId }) => {
     try {
-      const res = await fetch('http://localhost:3000/api/reviews', {
+      const res = await fetch('https://jp-server-blond.vercel.app/api/reviews', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -197,7 +197,7 @@ const MyBookings = () => {
       setIsReviewModalOpen(false);
     } catch (error) {
       alert('Failed to submit review');
-      console.error(error);
+    
     }
   };
 
@@ -212,7 +212,7 @@ const MyBookings = () => {
       } else {
         alert('Failed to cancel booking.');
       }
-      console.error(err);
+     
     }
   };
 

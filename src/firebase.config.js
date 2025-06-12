@@ -3,14 +3,15 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // ✅ এইটাই তোমার Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyAYs9F0gwa8DVrCT5MaiKjglG08aawdohg",
-  authDomain: "hotel-management-5b87e.firebaseapp.com",
-  projectId: "hotel-management-5b87e",
-  storageBucket: "hotel-management-5b87e.appspot.com", // 🔧 (".app" → ".com")
-  messagingSenderId: "831621484916",
-  appId: "1:831621484916:web:e4007650f451e9480c1c21",
-  measurementId: "G-BTXGPCYE03"
+// firebase.config.js
+export const firebaseConfig = {
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 // ✅ Firebase initialization

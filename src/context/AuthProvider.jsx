@@ -15,13 +15,13 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
       if(loggedUser?.email){
         const userData ={email:loggedUser.email};
-        axios.post('http://localhost:3000/jwt',userData)
+        axios.post('https://jp-server-blond.vercel.app/jwt',userData)
         .then(res=>{
-          console.log('token after jwt',res.data);
+          
         })
-        .catch(error => console.log(error));
+        
       }
-      console.log('user in the auth state change',loggedUser);
+      
     });
 
     return () => unsubscribe();
@@ -31,10 +31,10 @@ const AuthProvider = ({ children }) => {
     signOut(auth)
       .then(() => {
         setUser(null);
-        console.log("User logged out");
+        
       })
       .catch((error) => {
-        console.error("Logout error:", error);
+       
       });
   };
 

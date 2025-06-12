@@ -7,10 +7,10 @@ const FeaturedRooms = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3000/hotels/top-rated')
+    fetch('https://jp-server-blond.vercel.app/hotels/top-rated')
       .then(res => res.json())
       .then(data => setRooms(data.slice(0, 6)))
-      .catch(error => console.error('Error fetching rooms:', error));
+     
   }, []);
 
   return (

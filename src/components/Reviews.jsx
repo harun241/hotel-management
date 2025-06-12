@@ -7,10 +7,10 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/reviews")
+    fetch("https://jp-server-blond.vercel.app/reviews")
       .then(res => res.json())
       .then(data => setReviews(data))
-      .catch(err => console.error("Failed to fetch reviews:", err));
+      
   }, []);
 
   const settings = {

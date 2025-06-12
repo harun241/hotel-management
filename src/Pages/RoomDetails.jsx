@@ -21,7 +21,7 @@ const RoomDetails = () => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/rooms/${id}`);
+        const res = await axios.get(`https://jp-server-blond.vercel.app/api/rooms/${id}`);
         setRoom(res.data);
       } catch (err) {
         console.error('Failed to fetch room data', err);
@@ -35,7 +35,7 @@ const RoomDetails = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/reviews?roomId=${id}`);
+        const res = await axios.get(`https://jp-server-blond.vercel.app/reviews?roomId=${id}`);
         setReviews(res.data);
       } catch (err) {
         console.error('Failed to fetch reviews', err);
@@ -51,7 +51,7 @@ const RoomDetails = () => {
       if (user && id) {
         try {
           const res = await axios.get(
-            `http://localhost:3000/api/bookings?userEmail=${user.email}&roomId=${id}`
+            `https://jp-server-blond.vercel.app/api/bookings?userEmail=${user.email}&roomId=${id}`
           );
           if (res.data?.booking) {
             setUserBooking(res.data.booking);
@@ -85,7 +85,7 @@ const RoomDetails = () => {
     };
 
     try {
-      const res = await axios.post('http://localhost:3000/api/bookings', bookingData);
+      const res = await axios.post('http://jp-server-blond.vercel.app/api/bookings', bookingData);
       if (res.data.success) {
         alert(`Room booked successfully for ${bookingDate.toLocaleDateString()}`);
         setBookingModalOpen(false);
