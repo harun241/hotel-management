@@ -10,17 +10,17 @@ const Banner = () => {
     {
       title: "Luxurious Rooms",
       description: "Experience comfort and elegance like never before.",
-      image: "https://i.ibb.co/NnGWGQMD/46843072.jpg",
+      image: "https://i.ibb.co/Hfbz4kHX/1000-F-406678288-so-Uy6mmdi-Bdww-FDYBw-UNMd-NAp-Xq-Wj2t-S.jpg",
     },
     {
       title: "Relax and Unwind",
       description: "Enjoy your stay with premium amenities and views.",
-      image: "https://i.ibb.co/Kx6KdJFt/premium-photo-1661929519129-7a76946c1d38.jpg",
+      image: "https://i.ibb.co/WW77LF1B/1000-F-29034593-z9-NLKD9-H5-O77-DSiv-Rxc-GOn8r-I8y-Ifep-U.jpg",
     },
     {
       title: "Book Your Escape",
       description: "Find the perfect room for your vacation or business trip.",
-      image: "https://i.ibb.co/DPS48J2X/photo-1618773928121-c32242e63f39.jpg",
+      image: "https://i.ibb.co/7JwKqx5b/1000-F-29133877-bf-A2n7c-WV53fto2-Bomy-Z6py-Ruj-JTBwjd.jpg",
     },
   ];
 
