@@ -19,18 +19,27 @@ const Register = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const validatePassword = password => {
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const isValidLength = password.length >= 6;
+  
+ const validatePassword = (password) => {
+  let isValid = true;
 
-    if (!hasUpperCase || !hasLowerCase || !isValidLength) {
-      toast.error("Password must have uppercase, lowercase and be at least 6 characters long.");
-      return false;
-    }
+  if (!/[A-Z]/.test(password)) {
+    toast.error("Password must have at least one uppercase letter.");
+    isValid = false;
+  }
 
-    return true;
-  };
+  if (!/[a-z]/.test(password)) {
+    toast.error("Password must have at least one lowercase letter.");
+    isValid = false;
+  }
+
+  if (password.length < 6) {
+    toast.error("Password must be at least 6 characters long.");
+    isValid = false;
+  }
+
+  return isValid;
+};
 
   const handleRegister = async e => {
   e.preventDefault();

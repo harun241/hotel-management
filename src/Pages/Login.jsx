@@ -53,13 +53,24 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        
         <button type="submit" className="w-full bg-green-600 text-white p-2 rounded mb-3">
           Login
         </button>
+  
       </form>
-      <button onClick={handleGoogleLogin} className="w-full bg-black text-white p-2 rounded">
-        Sign in with Google
-      </button>
+            <p className="text-center mb-5">Or</p>
+      <button
+            onClick={handleGoogleLogin}
+            className="w-full border border-gray-300 rounded-lg py-3 flex justify-center items-center gap-3 hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300"
+          >
+            <img
+              src="https://i.ibb.co/dxR6RcY/search.png"
+              alt="Google Logo"
+              className="w-6 h-6"
+            />
+            Sign in with Google
+          </button>
      <div className="flex justify-center items-center mt-2">
           <small>Don’t Have Account?</small>
           <Link to="/register" className="text-violet-600 ml-1">
