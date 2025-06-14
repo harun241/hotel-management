@@ -17,6 +17,7 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^0.514.0",
     "motion": "^12.16.0",
+    "pigeon-maps": "^0.22.1",
     "prop-types": "^15.8.1",
     "react": "^19.0.0-rc.1",
     "react-datepicker": "^8.4.0",

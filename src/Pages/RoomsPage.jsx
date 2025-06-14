@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { Map } from 'pigeon-maps'
+import { osm } from 'pigeon-maps/providers'
 
 const RoomsPage = () => {
   const [rooms, setRooms] = useState([]);
@@ -14,6 +16,12 @@ const RoomsPage = () => {
 
   return (
     <div className="py-10 px-4 max-w-7xl mx-auto">
+       <Map
+    provider={osm}
+    height={200}
+    defaultCenter={[50.879, 4.6997]}
+    defaultZoom={11}
+  />
       <h2 className="text-4xl font-bold text-center mb-12">Featured Rooms</h2>
 
       <div className="flex flex-wrap justify-center gap-6">
@@ -48,8 +56,12 @@ const RoomsPage = () => {
           <p className="text-center text-gray-600">Loading rooms or no rooms found.</p>
         )}
       </div>
+      
     </div>
+
+    
   );
+  
 };
 
 export default RoomsPage;

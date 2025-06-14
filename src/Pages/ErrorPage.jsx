@@ -7,7 +7,7 @@ const ErrorPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 px-4">
       <img
-        src="https://media.giphy.com/media/14uQ3cOFteDaU/giphy.gif" 
+        src="https://i.ibb.co/39C96zXd/404-error-page-animation-download-in-lottie-json-gif-static-svg-file-formats-not-found-web-the-ultim.webp" 
         alt="404 Not Found"
         className="w-64 h-64 mb-6"
       />
