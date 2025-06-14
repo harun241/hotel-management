@@ -39,10 +39,10 @@ const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
 
       const data = await res.json();
       if (res.ok) {
-        alert('Review submitted successfully!');
+        toast.success('Review submitted successfully!');
         onClose();
       } else {
-        alert(data.message || 'Something went wrong!');
+        toast.error(data.message || 'Something went wrong!');
       }
     } catch (err) {
      

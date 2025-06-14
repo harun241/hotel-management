@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import ReviewModal from './ReviewModal';
+import { toast } from "react-toastify";
 
 
 const fetchUserBookings = async (email, accessToken) => {
@@ -86,24 +87,23 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
                 min={new Date().toISOString().slice(0, 10)}
               />
               <button
-                onClick={async () => {
-                  if (!newDate) {
-                    alert('Please select a valid date.');
-                    return;
-                  }
-                  try {
-                    await onUpdate(_id, newDate, room._id);
-                    setIsUpdating(false);
-                    alert('Booking updated!');
-                  } catch (err) {
-                    alert('Failed to update booking');
-                    
-                  }
-                }}
-                className="bg-green-500 text-white px-3 py-1 rounded mr-2 hover:bg-green-600"
-              >
-                Save
-              </button>
+  onClick={async () => {
+    if (!newDate) {
+      toast.error('Please select a valid date.');
+      return;
+    }
+    try {
+      await onUpdate(_id, newDate, room._id);
+      setIsUpdating(false);
+      toast.success('Booking updated successfully!');
+    } catch (err) {
+      toast.error('Failed to update booking');
+    }
+  }}
+  className="bg-green-500 text-white px-3 py-1 rounded mr-2 hover:bg-green-600"
+>
+  Save
+</button>
               <button
                 onClick={() => setIsUpdating(false)}
                 className="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
@@ -181,7 +181,7 @@ const MyBookings = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-         
+          Authorization: `Bearer ${user.accessToken}`,
         },
         body: JSON.stringify({
           userName,
@@ -193,10 +193,9 @@ const MyBookings = () => {
         }),
       });
       if (!res.ok) throw new Error('Failed to submit review');
-      alert('Review submitted!');
       setIsReviewModalOpen(false);
     } catch (error) {
-      alert('Failed to submit review');
+       toast.error('Failed to submit review');
     
     }
   };
@@ -205,12 +204,12 @@ const MyBookings = () => {
     try {
       await cancelBooking(bookingId);
       setBookings(prev => prev.filter(b => b._id !== bookingId));
-      alert('Booking canceled successfully!');
+      toast.error('Booking canceled!');
     } catch (err) {
       if (err.status === 403) {
-        alert('Cannot cancel this booking. You can only cancel at least 1 day in advance.');
+      toast.error('Cannot cancel this booking. You can only cancel at least 1 day in advance.');
       } else {
-        alert('Failed to cancel booking.');
+         toast.error('Failed to cancel booking');
       }
      
     }

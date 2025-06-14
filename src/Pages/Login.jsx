@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase.config";
 import { useNavigate } from "react-router";
 import {Link} from  "react-router"
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,18 +15,21 @@ const Login = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Login Successful!");
       navigate("/");
+
     } catch (error) {
-      alert("Login Failed: " + error.message);
+       toast.error("Login Failed: " + error.message);
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
+      toast.success("Login Successful!");
       navigate("/");
     } catch (error) {
-      alert("Google Login Failed: " + error.message);
+        toast.error("Google Login Failed: " + error.message);
     }
   };
 

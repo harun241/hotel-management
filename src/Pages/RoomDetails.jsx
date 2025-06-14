@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet';
 import { AuthContext } from '../context/AuthProvider';
 import ReviewModal from './ReviewModal';
 import HotelMap from '../components/HotelMap';
+import { toast } from "react-toastify";
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -68,12 +69,12 @@ const RoomDetails = () => {
 
   const handleBookingConfirm = async () => {
     if (!bookingDate) {
-      alert('Please select a booking date');
+      toast.error('Please select a booking date');
       return;
     }
 
     if (!user) {
-      alert('You must be logged in to book a room');
+      toast.error('You must be logged in to book a room');
       return;
     }
 
@@ -87,16 +88,16 @@ const RoomDetails = () => {
     try {
       const res = await axios.post('https://jp-server-blond.vercel.app/api/bookings', bookingData);
       if (res.data.success) {
-        alert(`Room booked successfully for ${bookingDate.toLocaleDateString()}`);
+        toast.success(`Room booked successfully for ${bookingDate.toLocaleDateString()}`);
         setBookingModalOpen(false);
         setBookingDate(null);
         setUserBooking(res.data.booking);
       } else {
-        alert('Booking failed. Please try again.');
+        toast.error('Booking failed. Please try again.');
       }
     } catch (error) {
       console.error('Booking error:', error);
-      alert('Room already booked on this date.');
+      toast.error('Room already booked on this date.');
     }
   };
 
