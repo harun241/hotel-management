@@ -1,6 +1,6 @@
 # Hotel Booking Platform
 
-![screenshot](./screenshot.png)
+![screenshot](https://i.ibb.co/YT4dJbRZ/image.png)
 
 ## Overview  
 A full-stack hotel booking platform with user authentication (JWT), booking management, and review system.
