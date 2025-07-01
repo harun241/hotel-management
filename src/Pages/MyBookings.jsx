@@ -3,43 +3,35 @@ import { AuthContext } from '../context/AuthProvider';
 import ReviewModal from './ReviewModal';
 import { toast } from "react-toastify";
 
-
 const fetchUserBookings = async (email, accessToken) => {
   const res = await fetch(`https://jp-server-blond.vercel.app/api/bookings?userEmail=${email}`, {
-   
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-
   if (!res.ok) throw new Error('Failed to fetch bookings');
   return await res.json();
 };
 
-const updateBookingDate = async (bookingId, newDate, roomId,accessToken) => {
+const updateBookingDate = async (bookingId, newDate, roomId, accessToken) => {
   const res = await fetch(`https://jp-server-blond.vercel.app/api/bookings/${bookingId}`, {
-
-     headers: {
-
-          'Content-Type': 'application/json' ,
-              Authorization: `Bearer ${accessToken}`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
     },
-
     method: 'PATCH',
-
     body: JSON.stringify({ bookingDate: new Date(newDate).toISOString(), roomId }),
   });
   if (!res.ok) throw new Error('Failed to update booking date');
   return await res.json();
 };
 
-const cancelBooking = async (bookingId,accessToken) => {
+const cancelBooking = async (bookingId, accessToken) => {
   const res = await fetch(`https://jp-server-blond.vercel.app/api/bookings/${bookingId}`, {
-method: 'DELETE',
-     headers: {
+    method: 'DELETE',
+    headers: {
       Authorization: `Bearer ${accessToken}`,
     },
-    
   });
   if (!res.ok) {
     const errorText = await res.text();
@@ -87,23 +79,23 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
                 min={new Date().toISOString().slice(0, 10)}
               />
               <button
-  onClick={async () => {
-    if (!newDate) {
-      toast.error('Please select a valid date.');
-      return;
-    }
-    try {
-      await onUpdate(_id, newDate, room._id);
-      setIsUpdating(false);
-      toast.success('Booking updated successfully!');
-    } catch (err) {
-      toast.error('Failed to update booking');
-    }
-  }}
-  className="bg-green-500 text-white px-3 py-1 rounded mr-2 hover:bg-green-600"
->
-  Save
-</button>
+                onClick={async () => {
+                  if (!newDate) {
+                    toast.error('Please select a valid date.');
+                    return;
+                  }
+                  try {
+                    await onUpdate(_id, newDate, room._id);
+                    setIsUpdating(false);
+                    toast.success('Booking updated successfully!');
+                  } catch (err) {
+                    toast.error('Failed to update booking');
+                  }
+                }}
+                className="bg-green-500 text-white px-3 py-1 rounded mr-2 hover:bg-green-600"
+              >
+                Save
+              </button>
               <button
                 onClick={() => setIsUpdating(false)}
                 className="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
@@ -148,7 +140,7 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
- 
+
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -160,16 +152,13 @@ const MyBookings = () => {
 
     setLoading(true);
     fetchUserBookings(user.email, user.accessToken)
-    
       .then(setBookings)
-      
-
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, [user?.email, user?.accessToken]);
 
   const handleUpdateBookingDate = async (bookingId, newDate, roomId) => {
-    await updateBookingDate(bookingId, newDate, roomId);
+    await updateBookingDate(bookingId, newDate, roomId, user.accessToken);
     setBookings(prev =>
       prev.map(b => (b._id === bookingId ? { ...b, bookingDate: new Date(newDate).toISOString() } : b))
     );
@@ -195,45 +184,50 @@ const MyBookings = () => {
       if (!res.ok) throw new Error('Failed to submit review');
       setIsReviewModalOpen(false);
     } catch (error) {
-       toast.error('Failed to submit review');
-    
+      toast.error('Failed to submit review');
     }
   };
 
   const handleCancelBooking = async (bookingId) => {
     try {
-      await cancelBooking(bookingId);
+      await cancelBooking(bookingId, user.accessToken);
       setBookings(prev => prev.filter(b => b._id !== bookingId));
       toast.error('Booking canceled!');
     } catch (err) {
       if (err.status === 403) {
-      toast.error('Cannot cancel this booking. You can only cancel at least 1 day in advance.');
+        toast.error('Cannot cancel this booking. You can only cancel at least 1 day in advance.');
       } else {
-         toast.error('Failed to cancel booking');
+        toast.error('Failed to cancel booking');
       }
-     
     }
   };
 
-  if (loading) return <p className="text-center mt-10 text-gray-700">Loading bookings...</p>;
-  if (error) return <p className="text-center mt-10 text-red-600">Error: {error}</p>;
-  if (bookings.length === 0) return <p className="text-center mt-10 text-gray-500">No bookings found.</p>;
-
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-6 min-h-[70vh] flex flex-col">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">My Bookings</h2>
-      {bookings.map(booking => (
-        <BookingCard
-          key={booking._id}
-          booking={booking}
-          onUpdate={handleUpdateBookingDate}
-          onCancel={handleCancelBooking}
-          onReview={(booking) => {
-            setSelectedBooking(booking);
-            setIsReviewModalOpen(true);
-          }}
-        />
-      ))}
+
+      <div className="flex-grow">
+        {loading ? (
+          <p className="text-center mt-10 text-gray-700">Loading bookings...</p>
+        ) : error ? (
+          <p className="text-center mt-10 text-red-600">Error: {error}</p>
+        ) : bookings.length === 0 ? (
+          <p className="text-center mt-10 text-gray-500">No bookings found.</p>
+        ) : (
+          bookings.map(booking => (
+            <BookingCard
+              key={booking._id}
+              booking={booking}
+              onUpdate={handleUpdateBookingDate}
+              onCancel={handleCancelBooking}
+              onReview={(booking) => {
+                setSelectedBooking(booking);
+                setIsReviewModalOpen(true);
+              }}
+            />
+          ))
+        )}
+      </div>
 
       {selectedBooking && (
         <ReviewModal

@@ -8,6 +8,7 @@ import MyBookings from "../Pages/MyBookings"
 import { createBrowserRouter } from "react-router";
 import RoomsPage from "../Pages/RoomsPage";
 import RoomDetails from "../Pages/RoomDetails"
+import About from "../Pages/About";
 
 
 
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: '/roomdetails/:id',
         element: <RoomDetails/>
+      },
+       {
+        path: '/about',
+        element: <About/>
       },
       
      
