@@ -9,6 +9,8 @@ import { createBrowserRouter } from "react-router";
 import RoomsPage from "../Pages/RoomsPage";
 import RoomDetails from "../Pages/RoomDetails"
 import About from "../Pages/About";
+import Contact from "../Pages/Contact";
+
 
 
 
@@ -33,6 +35,14 @@ export const router = createBrowserRouter([
         element: <Register/>,
       },
       {
+  path: 'mybookings',
+  element: (
+    <PrivateRoute>
+      <MyBookings />
+    </PrivateRoute>
+  ),
+},
+      {
         path: 'mybookings/:roomId',
         element: (
        <PrivateRoute>
@@ -53,7 +63,10 @@ export const router = createBrowserRouter([
         path: '/about',
         element: <About/>
       },
-      
+      {
+  path: "/contact",
+  element: <Contact></Contact>
+},
      
     ],
   },

@@ -1,9 +1,10 @@
 
 import React from "react";
-import { Navigate, useLocation } from "react-router";
+
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase.config";
 import { useEffect, useState } from "react";
+import { Navigate, useLocation } from "react-router";
 
 const PrivateRoute = ({ children }) => {
   const [user, setUser] = useState(null);
