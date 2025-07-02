@@ -8,38 +8,50 @@ const Reviews = () => {
 
   useEffect(() => {
     fetch("https://jp-server-blond.vercel.app/reviews")
-      .then(res => res.json())
-      .then(data => setReviews(data))
-      
+      .then((res) => res.json())
+      .then((data) => setReviews(data));
   }, []);
 
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 600,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 4000,
-    arrows: false
+    autoplaySpeed: 5000,
+    arrows: false,
+    adaptiveHeight: true,
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">What Our Users Say</h2>
+    <div className="max-w-5xl mx-auto px-6 py-12">
+      <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
+        💬 What Our Users Say
+      </h2>
 
       {reviews.length === 0 ? (
-        <p className="text-center">No reviews found.</p>
+        <p className="text-center text-gray-500">No reviews found.</p>
       ) : (
         <Slider {...settings}>
           {reviews.map((review) => (
-            <div key={review._id} className="border rounded-lg p-6 shadow-md bg-white text-center mx-4">
-              <p className="text-lg text-gray-800 italic mb-4">"{review.comment}"</p>
-              <div className="text-yellow-500 font-semibold mb-1">Rating: {review.rating}⭐</div>
-              <h3 className="text-lg font-bold text-gray-700">{review.userName}</h3>
-              <p className="text-sm text-gray-500">
-                {new Date(review.timestamp).toLocaleDateString()}
-              </p>
+            <div key={review._id} className="flex justify-center items-center px-4">
+              <div className="w-full max-w-md bg-white/70 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 shadow-xl flex flex-col justify-between items-center transition-transform duration-300 hover:scale-[1.02] text-center">
+                <p className="text-lg italic text-gray-700 mb-4 line-clamp-5">
+                  “{review.comment}”
+                </p>
+                <div className="flex flex-col items-center gap-1">
+                  <div className="text-yellow-500 font-semibold">
+                    ⭐ {review.rating} / 5
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    {review.userName}
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    {new Date(review.timestamp).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
         </Slider>
