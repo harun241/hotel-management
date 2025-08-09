@@ -33,7 +33,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center">
           <img
-            src="https://i.ibb.co.com/tTXgPytv/Black-and-Gold-Elegant-Hotel-Logo-1.png"
+            src="https://i.ibb.co.com/fYNVsGDC/Colorful-Modern-Infinity-Technology-Free-Logo.png"
             alt="Hotel Logo"
             className="h-12 w-12 rounded-full"
           />

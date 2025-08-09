@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../context/AuthProvider";
+import emailjs from "emailjs-com";
 
 const Contact = () => {
+  const { user } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -9,7 +13,16 @@ const Contact = () => {
 
   const [status, setStatus] = useState("");
 
+  // Auto-fill email if user is logged in
+  useEffect(() => {
+    if (user?.email) {
+      setFormData((prev) => ({ ...prev, email: user.email }));
+    }
+  }, [user]);
+
   const handleChange = (e) => {
+    if (e.target.name === "email" && user?.email) return; // prevent editing email if logged in
+
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -19,17 +32,24 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simple front-end validation
     if (!formData.name || !formData.email || !formData.message) {
       setStatus("Please fill in all fields.");
       return;
     }
 
-    // Here you can integrate API call to send form data
+    const serviceID = "service_scmw52f";
+    const templateID = "template_dlswg77";
+    const userID = "9cWZjaOA7dRmJH9f2";
 
-    // For demo, just show success and reset form
-    setStatus("Thank you for contacting us!");
-    setFormData({ name: "", email: "", message: "" });
+    emailjs
+      .send(serviceID, templateID, formData, userID)
+      .then(() => {
+        setStatus("Thank you for contacting us!");
+        setFormData({ name: "", email: user?.email || "", message: "" }); // keep user email if logged in
+      })
+      .catch(() => {
+        setStatus("Failed to send message. Please try again.");
+      });
   };
 
   return (
@@ -44,8 +64,8 @@ const Contact = () => {
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold text-gray-700">Get In Touch</h2>
             <p className="text-gray-600">
-              We'd love to hear from you. Whether you have questions about
-              booking, facilities, or anything else, our team is ready to help.
+              We'd love to hear from you. Whether you have questions about booking,
+              facilities, or anything else, our team is ready to help.
             </p>
             <div>
               <p className="text-gray-800 font-medium">📍 Address:</p>
@@ -90,9 +110,14 @@ const Contact = () => {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                    user?.email
+                      ? "border-gray-400 bg-gray-100 cursor-not-allowed"
+                      : "border-gray-300"
+                  }`}
                   placeholder="Enter your email"
                   required
+                  readOnly={!!user?.email}
                 />
               </div>
 
@@ -113,9 +138,11 @@ const Contact = () => {
               </div>
 
               {status && (
-                <p className={`mb-4 font-medium ${
-                  status.includes("Thank") ? "text-green-600" : "text-red-600"
-                }`}>
+                <p
+                  className={`mb-4 font-medium ${
+                    status.includes("Thank") ? "text-green-600" : "text-red-600"
+                  }`}
+                >
                   {status}
                 </p>
               )}
