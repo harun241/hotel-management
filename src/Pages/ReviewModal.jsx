@@ -30,7 +30,7 @@ const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
 
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3000/api/reviews', {
+      const res = await fetch('https://jp-server-blond.vercel.app/api/reviews', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

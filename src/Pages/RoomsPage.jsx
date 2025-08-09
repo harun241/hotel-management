@@ -10,7 +10,7 @@ const RoomsPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/all-rooms')
+    fetch('https://jp-server-blond.vercel.app/api/all-rooms')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch rooms');
         return res.json();

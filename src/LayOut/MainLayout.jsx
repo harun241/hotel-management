@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const MainLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen w-full flex flex-col">
       <ToastContainer
         position="top-right"
         autoClose={3000}

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 const fetchUserBookings = async (email, accessToken) => {
   const res = await fetch(
-    `http://localhost:3000/api/bookings?userEmail=${email}`,
+    `https://jp-server-blond.vercel.app/api/bookings?userEmail=${email}`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -21,7 +21,7 @@ const fetchUserBookings = async (email, accessToken) => {
 
 const updateBookingDate = async (bookingId, newDate, roomId, accessToken) => {
   const res = await fetch(
-    `http://localhost:3000/api/bookings/${bookingId}`,
+    `https://jp-server-blond.vercel.app/api/bookings/${bookingId}`,
     {
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const updateBookingDate = async (bookingId, newDate, roomId, accessToken) => {
 
 const cancelBooking = async (bookingId, accessToken) => {
   const res = await fetch(
-    `http://localhost:3000/api/bookings/${bookingId}`,
+    `https://jp-server-blond.vercel.app/api/bookings/${bookingId}`,
     {
       method: 'DELETE',
       headers: {
@@ -215,7 +215,7 @@ const MyBookings = () => {
   const handleSubmitReview = async ({ userName, rating, comment, roomId }) => {
     try {
       const res = await fetch(
-        'http://localhost:3000/api/reviews',
+        'https://jp-server-blond.vercel.app/api/reviews',
         {
           method: 'POST',
           headers: {

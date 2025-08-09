@@ -3,7 +3,7 @@ import axios from "axios";
 import { auth } from "./firebase";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://jp-server-blond.vercel.app",
 });
 
 // Add Firebase ID token to every request if logged in

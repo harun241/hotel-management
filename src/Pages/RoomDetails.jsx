@@ -22,7 +22,7 @@ const RoomDetails = () => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/rooms/${id}`);
+        const res = await axios.get(`https://jp-server-blond.vercel.app/api/rooms/${id}`);
         setRoom(res.data);
       } catch (err) {
         console.error('Failed to fetch room data', err);
@@ -36,7 +36,7 @@ const RoomDetails = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/reviews?roomId=${id}`);
+        const res = await axios.get(`https://jp-server-blond.vercel.app/api/reviews?roomId=${id}`);
         setReviews(res.data);
       } catch (err) {
         console.error('Failed to fetch reviews', err);
@@ -52,7 +52,7 @@ const RoomDetails = () => {
       if (user?.email && id && user.accessToken) {
         try {
           const res = await axios.get(
-            `http://localhost:3000/api/bookings?userEmail=${user.email}&roomId=${id}`,
+            `https://jp-server-blond.vercel.app/api/bookings?userEmail=${user.email}&roomId=${id}`,
             {
               headers: {
                 Authorization: `Bearer ${user.accessToken}`,
@@ -94,7 +94,7 @@ const RoomDetails = () => {
 
     try {
       const res = await axios.post(
-        'http://localhost:3000/api/bookings',
+        'https://jp-server-blond.vercel.app/api/bookings',
         bookingData,
         {
           headers: {
@@ -132,7 +132,7 @@ const RoomDetails = () => {
         <meta property="og:title" content={room.name} />
         <meta property="og:description" content={room.description?.slice(0, 150)} />
         <meta property="og:image" content={room.image} />
-        <link rel="canonical" href={`http://localhost:3000/room/${id}`} />
+        <link rel="canonical" href={`https://jp-server-blond.vercel.app/room/${id}`} />
       </Helmet>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -193,7 +193,7 @@ const RoomDetails = () => {
           {userBooking && (
             <button
               onClick={() => setReviewModalOpen(true)}
-              className="btn btn-primary w-full"
+              className="btn btn-success w-full"
             >
               Give Review
             </button>

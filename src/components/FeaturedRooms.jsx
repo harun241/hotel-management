@@ -10,7 +10,7 @@ const FeaturedRooms = () => {
   useEffect(() => {
     const token = localStorage.getItem('accessToken'); // JWT token from localStorage
 
-    fetch('http://localhost:3000/hotels/top-rated', {
+    fetch('https://jp-server-blond.vercel.app/hotels/top-rated', {
       headers: {
         Authorization: `Bearer ${token}`, // Authorization header with token
       },
@@ -43,7 +43,7 @@ const FeaturedRooms = () => {
         exit={{ opacity: 0, y: 20 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-4xl font-bold text-center mb-10">Featured Rooms</h2>
+        <h2 className="text-4xl font-bold text-center mb-10">Top Rated Rooms</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {rooms.length > 0 ? (
             rooms.map((room) => (

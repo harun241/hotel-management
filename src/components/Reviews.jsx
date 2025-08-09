@@ -9,7 +9,7 @@ const Reviews = () => {
   useEffect(() => {
     const token = localStorage.getItem("accessToken"); // localStorage theke token neya
 
-    fetch("http://localhost:3000/reviews", {
+    fetch("https://jp-server-blond.vercel.app/reviews", {
       headers: {
         Authorization: `Bearer ${token}`,  // Authorization header add kora holo
       },
