@@ -35,7 +35,7 @@ const Navbar = () => {
           <img
             src="https://i.ibb.co.com/tTXgPytv/Black-and-Gold-Elegant-Hotel-Logo-1.png"
             alt="Hotel Logo"
-            className="h-12 w-12 rounded"
+            className="h-12 w-12 rounded-full"
           />
           <span className="ml-2 text-xl font-bold text-gray-700 dark:text-gray-200 hidden md:inline-block">
             HotelEase
@@ -133,19 +133,18 @@ const Navbar = () => {
             style={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}
           >
             {navLinks.map(({ path, label }) => (
-              <NavLink
-                key={path}
-                to={path}
-                onClick={closeMenu}
-              className={({ isActive }) =>
-    'relative px-1 transition-colors duration-300 ease-in-out ' +
-    (isActive
-      ? 'border-b-2 border-green-500' : 'hover:border-b hover:border-gray-400 text-green-600')
-  }
-
-              >
-                {label}
-              </NavLink>
+                 <NavLink
+                  key={path}
+                  to={path}
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'block text-blue-600 dark:text-blue-400 font-semibold py-2'
+                      : 'block text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 py-2'
+                  }
+                >
+                  {label}
+                </NavLink>
             ))}
           </motion.div>
         )}
