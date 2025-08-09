@@ -13,15 +13,21 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
       setUser(loggedUser);
       setLoading(false);
-      if(loggedUser?.email){
-        const userData ={email:loggedUser.email};
-        axios.post('https://jp-server-blond.vercel.app/jwt',userData)
-        .then(res=>{
-          
-        })
-        
+
+      if (loggedUser?.email) {
+        const userData = { email: loggedUser.email };
+        axios
+          .post(
+            "http://localhost:3000/jwt",
+            userData
+          )
+          .then((res) => {
+            localStorage.setItem("token", res.data.token);
+          })
+          .catch((error) => {
+            console.error("Failed to get JWT", error);
+          });
       }
-      
     });
 
     return () => unsubscribe();
@@ -31,10 +37,9 @@ const AuthProvider = ({ children }) => {
     signOut(auth)
       .then(() => {
         setUser(null);
-        
       })
       .catch((error) => {
-       
+        console.error("Logout error:", error);
       });
   };
 

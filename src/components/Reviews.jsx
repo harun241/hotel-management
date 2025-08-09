@@ -7,9 +7,22 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("https://jp-server-blond.vercel.app/reviews")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
+    const token = localStorage.getItem("accessToken"); // localStorage theke token neya
+
+    fetch("http://localhost:3000/reviews", {
+      headers: {
+        Authorization: `Bearer ${token}`,  // Authorization header add kora holo
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`Error: ${res.status} ${res.statusText}`);
+        return res.json();
+      })
+      .then((data) => setReviews(data))
+      .catch((err) => {
+        console.error("Failed to fetch reviews:", err);
+        setReviews([]); // Error hole empty array set kora jabe
+      });
   }, []);
 
   const settings = {

@@ -22,50 +22,57 @@ const RoomDetails = () => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const res = await axios.get(`https://jp-server-blond.vercel.app/api/rooms/${id}`);
+        const res = await axios.get(`http://localhost:3000/api/rooms/${id}`);
         setRoom(res.data);
       } catch (err) {
         console.error('Failed to fetch room data', err);
+        toast.error('Failed to load room details.');
       }
     };
 
     fetchRoom();
   }, [id]);
 
-
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`https://jp-server-blond.vercel.app/reviews?roomId=${id}`);
+        const res = await axios.get(`http://localhost:3000/api/reviews?roomId=${id}`);
         setReviews(res.data);
       } catch (err) {
         console.error('Failed to fetch reviews', err);
+        toast.error('Failed to load reviews.');
       }
     };
 
     fetchReviews();
   }, [id]);
 
-
   useEffect(() => {
     const fetchUserBooking = async () => {
-      if (user && id) {
+      if (user?.email && id && user.accessToken) {
         try {
           const res = await axios.get(
-            `https://jp-server-blond.vercel.app/api/bookings?userEmail=${user.email}&roomId=${id}`
+            `http://localhost:3000/api/bookings?userEmail=${user.email}&roomId=${id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${user.accessToken}`,
+              },
+            }
           );
-          if (res.data?.booking) {
-            setUserBooking(res.data.booking);
+          if (res.data?.length > 0) {
+            setUserBooking(res.data[0]);
+          } else {
+            setUserBooking(null);
           }
         } catch (error) {
           console.error('Error fetching user booking:', error);
+          toast.error('Failed to load your bookings.');
         }
       }
     };
 
     fetchUserBooking();
   }, [user, id]);
-
 
   const handleBookingConfirm = async () => {
     if (!bookingDate) {
@@ -86,18 +93,30 @@ const RoomDetails = () => {
     };
 
     try {
-      const res = await axios.post('https://jp-server-blond.vercel.app/api/bookings', bookingData);
+      const res = await axios.post(
+        'http://localhost:3000/api/bookings',
+        bookingData,
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      );
       if (res.data.success) {
         toast.success(`Room booked successfully for ${bookingDate.toLocaleDateString()}`);
         setBookingModalOpen(false);
         setBookingDate(null);
-        setUserBooking(res.data.booking);
+        setUserBooking(res.data.booking || bookingData); // fallback to bookingData if backend doesn't return booking object
       } else {
         toast.error('Booking failed. Please try again.');
       }
     } catch (error) {
       console.error('Booking error:', error);
-      toast.error('Room already booked on this date.');
+      if (error.response?.status === 409) {
+        toast.error('Room already booked on this date.');
+      } else {
+        toast.error('Booking failed. Please try again.');
+      }
     }
   };
 
@@ -107,17 +126,15 @@ const RoomDetails = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-     
       <Helmet>
         <title>{room.name} | Hotelify</title>
         <meta name="description" content={room.description?.slice(0, 150)} />
         <meta property="og:title" content={room.name} />
         <meta property="og:description" content={room.description?.slice(0, 150)} />
         <meta property="og:image" content={room.image} />
-        <link rel="canonical" href={`https://jp-server-blond.vercel.app/room/${id}`} />
+        <link rel="canonical" href={`http://localhost:3000/room/${id}`} />
       </Helmet>
 
-     
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <img
           src={room.image}
@@ -140,14 +157,12 @@ const RoomDetails = () => {
         </div>
       </div>
 
-     
       {room.latitude && room.longitude && (
         <div className="mt-10">
           <h2 className="text-xl font-semibold mb-2">Location</h2>
           <HotelMap latitude={room.latitude} longitude={room.longitude} name={room.name} />
         </div>
       )}
-
 
       <div className="mt-8">
         <h3 className="text-2xl font-semibold mb-4">User Reviews</h3>
@@ -166,7 +181,6 @@ const RoomDetails = () => {
           <p className="text-gray-500">No reviews yet for this room.</p>
         )}
 
-       
         <div className="mt-6 space-y-3">
           <button
             onClick={() => setBookingModalOpen(true)}
@@ -187,7 +201,6 @@ const RoomDetails = () => {
         </div>
       </div>
 
-      
       {bookingModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded shadow-lg w-96">
@@ -199,7 +212,7 @@ const RoomDetails = () => {
             <label className="block mt-4 mb-2">Select Booking Date:</label>
             <DatePicker
               selected={bookingDate}
-              onChange={(date) => setBookingDate(date)}
+              onChange={setBookingDate}
               minDate={new Date()}
               dateFormat="yyyy-MM-dd"
               className="border p-2 rounded w-full"
@@ -223,7 +236,6 @@ const RoomDetails = () => {
         </div>
       )}
 
-   
       {reviewModalOpen && (
         <ReviewModal
           isOpen={reviewModalOpen}

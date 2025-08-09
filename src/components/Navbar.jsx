@@ -35,7 +35,9 @@ const Navbar = () => {
               alt="Hotel Logo"
               className="h-12 w-12 rounded"
             />
-            <span className="ml-2 text-xl font-bold text-gray-700 dark:text-gray-200">HotelEase</span>
+            <span className="ml-2 text-xl font-bold text-gray-700 dark:text-gray-200 hidden md:inline-block">
+              HotelEase
+            </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -107,7 +109,11 @@ const Navbar = () => {
             )}
 
             <button onClick={toggleMenu} aria-label="Toggle menu">
-              {isOpen ? <X size={28} className="text-gray-700 dark:text-white" /> : <Menu size={28} className="text-gray-700 dark:text-white" />}
+              {isOpen ? (
+                <X size={28} className="text-gray-700 dark:text-white" />
+              ) : (
+                <Menu size={28} className="text-gray-700 dark:text-white" />
+              )}
             </button>
           </div>
         </div>

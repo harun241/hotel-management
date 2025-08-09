@@ -17,6 +17,9 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login Successful!");
       navigate("/");
+      const user = auth.currentUser;
+    const idToken = await user.getIdToken();
+    localStorage.setItem('token', idToken);  
 
     } catch (error) {
        toast.error("Login Failed: " + error.message);
@@ -28,6 +31,9 @@ const Login = () => {
       await signInWithPopup(auth, googleProvider);
       toast.success("Login Successful!");
       navigate("/");
+      const user = auth.currentUser;
+    const idToken = await user.getIdToken();
+    localStorage.setItem('token', idToken);  
     } catch (error) {
         toast.error("Google Login Failed: " + error.message);
     }
