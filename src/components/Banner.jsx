@@ -49,7 +49,7 @@ const Banner = () => {
               <h2 className="text-3xl md:text-5xl font-bold mb-4">{slide.title}</h2>
               <p className="text-base md:text-lg mb-6 max-w-2xl">{slide.description}</p>
               <Link to="/rooms">
-                <button className="bg-white text-black px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">
+                <button className="bg-sky-400 text-black px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">
                   View Rooms
                 </button>
               </Link>
