@@ -164,7 +164,7 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
 
           <button
             onClick={() => onReview(booking)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-sky-400 text-white px-4 py-2 rounded hover:bg-sky-600"
           >
             Review
           </button>
@@ -172,7 +172,7 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
           {!isUpdating && (
             <button
               onClick={() => setIsUpdating(true)}
-              className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
             >
               Update Date
             </button>

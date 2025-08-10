@@ -132,7 +132,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  placeholder="Write your message..."
+                  placeholder="write message with your contact details ...."
                   required
                 ></textarea>
               </div>
@@ -149,7 +149,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+                className="w-full bg-sky-400 text-white py-2 rounded-md hover:bg-sky-600 transition"
               >
                 Send Message
               </button>
