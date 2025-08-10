@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { AlignCenter, AlignCenterHorizontal } from "lucide-react";
+import Loader from "./Loader";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -43,6 +44,7 @@ const Reviews = () => {
 
   return (
     <div className="max-w-xl mx-auto px-6 py-16">
+      <Loader></Loader>
       <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
         💬 What Our Users Say
       </h2>

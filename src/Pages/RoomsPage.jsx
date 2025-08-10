@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { Map } from 'pigeon-maps';
-import { osm } from 'pigeon-maps/providers';
+import { useNavigate } from 'react-router'; 
 import { toast } from 'react-toastify';
 import HotelAnimation from '../components/HotelAnimation';
+import Loader from '../components/Loader';
 
 const RoomsPage = () => {
   const [rooms, setRooms] = useState([]);
@@ -27,27 +26,16 @@ const RoomsPage = () => {
       });
   }, []);
 
-  // Optional: Calculate average center based on rooms location (if available)
-  const averageLat =
-    rooms.length > 0
-      ? rooms.reduce((acc, room) => acc + (room.latitude ?? 0), 0) / rooms.length
-      : 50.879;
-  const averageLng =
-    rooms.length > 0
-      ? rooms.reduce((acc, room) => acc + (room.longitude ?? 0), 0) / rooms.length
-      : 4.6997;
+  if (isLoading) {
+    return <Loader />; // show loader while loading
+  }
 
   return (
-    <div className="py-10 px-4  mx-auto min-h-[60vh]">
-      <Map provider={osm} height={200} defaultCenter={[averageLat, averageLng]} defaultZoom={11} />
-<HotelAnimation></HotelAnimation>
+    <div className="py-10 px-4 mx-auto min-h-[60vh]">
+      <HotelAnimation />
       <h2 className="text-4xl font-bold text-center mb-12">Featured Rooms</h2>
 
-      {isLoading ? (
-        <div className="flex justify-center items-center min-h-[30vh] text-gray-600 text-lg">
-          Loading rooms...
-        </div>
-      ) : rooms.length === 0 ? (
+      {rooms.length === 0 ? (
         <p className="text-center text-gray-600">No rooms found.</p>
       ) : (
         <div className="flex flex-wrap justify-center gap-6">

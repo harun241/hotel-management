@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Rating from 'react-rating';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import Loader from '../components/Loader';
 
 const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
   const [rating, setRating] = useState(5);
@@ -29,6 +30,7 @@ const ReviewModal = ({ isOpen, onClose, roomId, user }) => {
     }
 
     setLoading(true);
+      if (loading) return <Loader />;
     try {
       const res = await fetch('https://jp-server-blond.vercel.app/api/reviews', {
         method: 'POST',

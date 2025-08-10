@@ -8,6 +8,7 @@ import { AuthContext } from '../context/AuthProvider';
 import ReviewModal from './ReviewModal';
 import HotelMap from '../components/HotelMap';
 import { toast } from "react-toastify";
+import Loader from '../components/Loader';
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -123,7 +124,7 @@ const RoomDetails = () => {
   if (!room) {
     return <div className="p-6 text-center">Loading room details...</div>;
   }
-
+   if (loading) return <Loader />;
   return (
     <div className="max-w-5xl mx-auto p-6">
       <Helmet>

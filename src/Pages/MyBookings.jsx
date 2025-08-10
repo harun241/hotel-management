@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import ReviewModal from './ReviewModal';
 import { toast } from 'react-toastify';
+import Loader from '../components/Loader';  // Your spinner loader component
 
+// Fetch user bookings from API
 const fetchUserBookings = async (email, accessToken) => {
   const res = await fetch(
     `https://jp-server-blond.vercel.app/api/bookings?userEmail=${email}`,
@@ -19,6 +21,7 @@ const fetchUserBookings = async (email, accessToken) => {
   return await res.json();
 };
 
+// Update booking date API call
 const updateBookingDate = async (bookingId, newDate, roomId, accessToken) => {
   const res = await fetch(
     `https://jp-server-blond.vercel.app/api/bookings/${bookingId}`,
@@ -38,6 +41,7 @@ const updateBookingDate = async (bookingId, newDate, roomId, accessToken) => {
   return await res.json();
 };
 
+// Cancel booking API call
 const cancelBooking = async (bookingId, accessToken) => {
   const res = await fetch(
     `https://jp-server-blond.vercel.app/api/bookings/${bookingId}`,
@@ -57,6 +61,7 @@ const cancelBooking = async (bookingId, accessToken) => {
   return await res.json();
 };
 
+// Booking card UI and logic
 const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
   const { bookingDate, createdAt, room, _id, userName, userEmail, userImage } = booking;
   const [isUpdating, setIsUpdating] = useState(false);
@@ -66,8 +71,10 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
 
   const today = new Date();
   const bookingDay = new Date(bookingDate);
-  // Calculate difference in full days ignoring time part
-  const diffInDays = Math.floor((bookingDay.setHours(0, 0, 0, 0) - today.setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24));
+  // Days difference ignoring time
+  const diffInDays = Math.floor(
+    (bookingDay.setHours(0, 0, 0, 0) - today.setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24)
+  );
   const isCancellable = diffInDays >= 1;
 
   return (
@@ -183,6 +190,7 @@ const BookingCard = ({ booking, onUpdate, onCancel, onReview }) => {
   );
 };
 
+// Main component
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
 
@@ -214,24 +222,21 @@ const MyBookings = () => {
 
   const handleSubmitReview = async ({ userName, rating, comment, roomId }) => {
     try {
-      const res = await fetch(
-        'https://jp-server-blond.vercel.app/api/reviews',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.accessToken}`,
-          },
-          body: JSON.stringify({
-            userName,
-            rating,
-            comment,
-            roomId,
-            timestamp: new Date().toISOString(),
-            userEmail: user.email,
-          }),
-        }
-      );
+      const res = await fetch('https://jp-server-blond.vercel.app/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify({
+          userName,
+          rating,
+          comment,
+          roomId,
+          timestamp: new Date().toISOString(),
+          userEmail: user.email,
+        }),
+      });
       if (!res.ok) {
         const errorText = await res.text();
         throw new Error(errorText || 'Failed to submit review');
@@ -254,7 +259,7 @@ const MyBookings = () => {
 
       <div className="flex-grow">
         {loading ? (
-          <p className="text-center mt-10 text-gray-700">Loading bookings...</p>
+          <Loader />   // <-- Show spinner while loading
         ) : error ? (
           <p className="text-center mt-10 text-red-600">Error: {error}</p>
         ) : bookings.length === 0 ? (

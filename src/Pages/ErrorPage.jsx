@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import Loader from "../components/Loader";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 px-4">
+      <Loader></Loader>
       <img
         src="https://i.ibb.co/39C96zXd/404-error-page-animation-download-in-lottie-json-gif-static-svg-file-formats-not-found-web-the-ultim.webp" 
         alt="404 Not Found"

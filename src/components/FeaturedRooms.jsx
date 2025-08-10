@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router'; // Use react-router-dom for web apps
+import { Link } from 'react-router'; 
 import { motion } from 'framer-motion';
+import Loader from './Loader';
 
 const FeaturedRooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -8,19 +9,19 @@ const FeaturedRooms = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken'); // JWT token from localStorage
+    const token = localStorage.getItem('accessToken');
 
     fetch('https://jp-server-blond.vercel.app/hotels/top-rated', {
       headers: {
-        Authorization: `Bearer ${token}`, // Authorization header with token
+        Authorization: `Bearer ${token}`,
       },
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error(`Error: ${res.status} ${res.statusText}`);
         return res.json();
       })
-      .then(data => setRooms(data.slice(0, 6)))
-      .catch(err => {
+      .then((data) => setRooms(data.slice(0, 6)))
+      .catch((err) => {
         console.error('Failed to fetch rooms:', err);
         setError('Failed to load rooms. Please try again later.');
       })
@@ -28,7 +29,7 @@ const FeaturedRooms = () => {
   }, []);
 
   if (loading) {
-    return <p className="text-center py-10">Loading rooms...</p>;
+    return <Loader />;
   }
 
   if (error) {
@@ -69,7 +70,7 @@ const FeaturedRooms = () => {
                   </div>
 
                   <Link to={`/roomdetails/${room._id}`} className="mt-auto">
-                    <button className="w-full btn btn-info text-white py-2 px-4 rounded-lg transition duration-200">
+                    <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-200">
                       Book Now
                     </button>
                   </Link>

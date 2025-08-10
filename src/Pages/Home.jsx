@@ -8,6 +8,7 @@ import HowItWorks from '../components/HowItWorks';
 import SpecialOfferModal from '../components/SpecialOfferModal';
 
 
+
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -22,6 +23,7 @@ const Home = () => {
 
   return (
     <div>
+   
       <Banner />
       <HotelMap />
      
