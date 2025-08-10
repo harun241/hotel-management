@@ -17,6 +17,7 @@
     "firebase": "^11.8.1",
     "framer-motion": "^12.22.0",
     "leaflet": "^1.9.4",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.514.0",
     "motion": "^12.16.0",
     "pigeon-maps": "^0.22.1",

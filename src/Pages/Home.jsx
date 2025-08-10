@@ -7,6 +7,7 @@ import Reviews from '../components/Reviews';
 import HowItWorks from '../components/HowItWorks';
 import SpecialOfferModal from '../components/SpecialOfferModal';
 
+
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -23,6 +24,7 @@ const Home = () => {
     <div>
       <Banner />
       <HotelMap />
+     
       <FeaturedRooms />
       <HowItWorks />
       <WhyChooseUs />

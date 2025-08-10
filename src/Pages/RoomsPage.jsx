@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { Map } from 'pigeon-maps';
 import { osm } from 'pigeon-maps/providers';
 import { toast } from 'react-toastify';
+import HotelAnimation from '../components/HotelAnimation';
 
 const RoomsPage = () => {
   const [rooms, setRooms] = useState([]);
@@ -39,7 +40,7 @@ const RoomsPage = () => {
   return (
     <div className="py-10 px-4  mx-auto min-h-[60vh]">
       <Map provider={osm} height={200} defaultCenter={[averageLat, averageLng]} defaultZoom={11} />
-
+<HotelAnimation></HotelAnimation>
       <h2 className="text-4xl font-bold text-center mb-12">Featured Rooms</h2>
 
       {isLoading ? (

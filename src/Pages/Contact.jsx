@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import emailjs from "emailjs-com";
+import ContactAnimation from "../components/ContactAnimation";
 
 const Contact = () => {
   const { user } = useContext(AuthContext);
@@ -55,6 +56,7 @@ const Contact = () => {
   return (
     <div className="bg-gray-100 py-10 px-4 md:px-20 min-h-screen">
       <div className="max-w-6xl mx-auto">
+        <ContactAnimation></ContactAnimation>
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">
           Contact Us
         </h1>
