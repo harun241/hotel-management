@@ -1,29 +1,51 @@
-import React from 'react';
+import React from "react";
 
 const WhyChooseUs = () => {
-  return (
-    <div style={{ textAlign: 'center', margin: '50px 0', padding: '20px' }}>
-      <h2 style={{ fontSize: '28px', marginBottom: '10px' }}>Why Choose Our Rooms?</h2>
-      <p style={{ maxWidth: '700px', margin: '0 auto', fontSize: '16px', color: '#555' }}>
-        Experience unmatched comfort and convenience. Our rooms are rated for exceptional hospitality,
-        top-class amenities, and great value.
-      </p>
+  const features = [
+    {
+      icon: "✅",
+      title: "Verified Hotels",
+      description: "Each room is handpicked and verified by our quality team.",
+    },
+    {
+      icon: "🌐",
+      title: "Free Amenities",
+      description: "WiFi, AC, breakfast & more included with every booking.",
+    },
+    {
+      icon: "💬",
+      title: "24/7 Support",
+      description: "Our dedicated team is available anytime during your stay.",
+    },
+  ];
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginTop: '30px', flexWrap: 'wrap' }}>
-        <div>
-          <h4>✅ Verified Hotels</h4>
-          <p style={{ color: '#777' }}>Each room is handpicked and verified by our team.</p>
-        </div>
-        <div>
-          <h4>🌐 Free Amenities</h4>
-          <p style={{ color: '#777' }}>WiFi, AC, breakfast & more included with every booking.</p>
-        </div>
-        <div>
-          <h4>💬 24/7 Support</h4>
-          <p style={{ color: '#777' }}>We’re here to assist you anytime during your stay.</p>
+  return (
+    <section className="py-16 ">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">
+          Why Choose Our Rooms?
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Experience unmatched comfort and convenience. Our rooms are rated for
+          exceptional hospitality, top-class amenities, and great value.
+        </p>
+
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition"
+            >
+              <div className="text-4xl mb-4">{feature.icon}</div>
+              <h4 className="text-lg font-semibold text-gray-800">
+                {feature.title}
+              </h4>
+              <p className="text-gray-600 mt-2">{feature.description}</p>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

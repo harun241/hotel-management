@@ -73,11 +73,11 @@ const Contact = () => {
             </div>
             <div>
               <p className="text-gray-800 font-medium">📞 Phone:</p>
-              <p className="text-gray-600">+880 1234-567890</p>
+              <p className="text-gray-600">+880 1820903961</p>
             </div>
             <div>
               <p className="text-gray-800 font-medium">📧 Email:</p>
-              <p className="text-gray-600">contact@royalhaven.com</p>
+              <p className="text-gray-600">info.hotelease.com</p>
             </div>
           </div>
 
